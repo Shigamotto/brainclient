@@ -1,0 +1,6 @@
+.lst-i {display:inline-block; width:calc(25%  - 10px); background-color:rgb(50,58,68); margin-right:10px; margin-top:10px;
+  text-align:center; color:white; padding-bottom:30px; text-decoration:none;}
+.lst-i:hover {background-color:rgba(50,58,68,.2)}
+.lst-i:nth-child(4n) {margin-right:0;}
+.lst-i:before {font-family:dripicons; display: block; margin:30px auto 20px; font-size:32px; content:"\67"; }
+.lst-i.personal:before{content:"\72"}

@@ -1,0 +1,8 @@
+<div class="lst">
+    <a *ngFor="let wh of warehouses; let i = index"
+       [routerLink]="[wh.id]"
+       class="lst-i"
+    >{{ wh.name }}
+    </a>
+</div>
+

@@ -1,0 +1,17 @@
+.mail-menu {display:block; margin-bottom:1px;}
+.mail-menu:after {content:''; clear:both; float:none; display:table; width:100%;}
+.mail-button {display:inline-block; height:30px; line-height:30px; float:left; padding: 0 12px 0 8px; background-color:rgba(50,58,69, .1); margin-right:1px; color:rgba(50,58,69,.6); cursor:pointer;}
+.mail-button:hover {color:rgb(50,58,69);background-color:rgba(50,58,69, .2)}
+.mail-button:before {display:block; font-family: dripicons; margin-right:6px; float:left;}
+
+.refresh:before {content: "\5a";margin:0; padding-left: 4px;}
+.create:before {content: "\2b";}
+.forward:before {content: "\7c";}
+.reply:before {content:"\e03b";}
+.delete:before {content: "\e053";}
+.seen:before {content: "\e037";}
+.mark:before {content: "\43";}
+.lock:before {content:"\e013"}
+.unlock:before {content: "\e014"}
+.task:before {content: "\e029"}
+.print:before {content: "\e038"}

@@ -1,0 +1,55 @@
+<div class="sidebar" *ngIf="authService.isAuthenticated()" [ngClass]="{'toggle': !headerService.menuOpened}">
+    <a class="brainlogo" (click)="onToggleMenu()"></a>
+    <div class="close" (click)="onToggleMenu()"></div>
+    <div class="user-avatar">
+        <img src="https://pp.userapi.com/c4920/u1736036/-6/w_db7cc8ac.jpg" class="avatar">
+    </div>
+    <span class="username">{{ user.first_name }} {{ user.last_name }}</span>
+    <accordion class="sidebar-nav">
+        <accordion-group class="sidebar-i desk">
+            <accordion-heading routerLink="/desk" routerLinkActive="active">Desk</accordion-heading>
+        </accordion-group>
+        <accordion-group class="sidebar-i projects">
+            <accordion-heading routerLink="/projects" routerLinkActive="active">Projects</accordion-heading>
+            <li routerLink="/projects/leads" routerLinkActive="active" >Lead</li>
+            <li routerLink="/projects/list" routerLinkActive="active" >List</li>
+            <li routerLink="/projects/calendar" routerLinkActive="active">Calendar</li>
+            <li routerLink="/projects/gantt" routerLinkActive="active" >Gant</li>
+            <li routerLink="/projects/kanban" routerLinkActive="active" >Kanban</li>
+        </accordion-group>
+        <accordion-group class="sidebar-i mail" >
+            <accordion-heading routerLink="/messages" routerLinkActive="active">Messages</accordion-heading>
+            <li routerLink="/messages/bp" routerLinkActive="active" >Messages</li>
+            <li routerLink="/messages/mail" routerLinkActive="active" >Mail</li>
+            <li routerLink="/messages/telegram" routerLinkActive="active" class="hidden" >Telegram</li>
+            <li routerLink="/messages/viber" routerLinkActive="active" class="hidden" >Viber</li>
+        </accordion-group>
+        <accordion-group class="sidebar-i bk" >
+            <accordion-heading routerLink="/bk" routerLinkActive="active" >Bookkeeping</accordion-heading>
+            <li routerLink="/bk/list" routerLinkActive="active" >Booksheets</li>
+            <li routerLink="/bk/wh" routerLinkActive="active" >Warehouse</li>
+            <li routerLink="/bk/bom" routerLinkActive="active" >BOMs</li>
+            <li routerLink="/bk/item" routerLinkActive="active" >Items</li>
+            <li routerLink="/bk/order" routerLinkActive="active" >Product order</li>
+        </accordion-group>
+        <accordion-group class="sidebar-i friends" routerLink="/friends" routerLinkActive="active">
+            <accordion-heading>Friends</accordion-heading>
+        </accordion-group>
+        <accordion-group class="sidebar-i set">
+            <accordion-heading routerLink="/settings" routerLinkActive="active">Settings</accordion-heading>
+        </accordion-group>
+        <accordion-group class="sidebar-i logout">
+            <accordion-heading (click)="onLogout()">Logout</accordion-heading>
+        </accordion-group>
+    </accordion>
+</div>
+<div class="sidebar" *ngIf="!authService.isAuthenticated()" >
+    <div class="user-offline">
+        <img src="../../../assets/logo.svg" class="avatar">
+    </div>
+    <nav class="sidebar-nav">
+        <a routerLink="/signin" routerLinkActive="active" class="sidebar-i login">Login</a>
+        <a routerLink="/about" routerLinkActive="active" class="sidebar-i about">about</a>
+        <a routerLink="/blog" routerLinkActive="active" class="sidebar-i blog">Blog</a>
+    </nav>
+</div>

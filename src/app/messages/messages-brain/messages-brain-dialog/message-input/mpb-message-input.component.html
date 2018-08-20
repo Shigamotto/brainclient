@@ -1,0 +1,11 @@
+<form [formGroup]="MBPForm" (ngSubmit)="onSubmit()">
+    <!-- <input formControlName="name"
+           type="hidden"
+           value="authService.username"> -->
+    <textarea autosize
+              formControlName="message"
+              id="message"
+              placeholder="Сообщение"
+              rows="1"></textarea>
+    <button type="submit" [disabled]="!MBPForm.valid"></button>
+</form>

@@ -1,0 +1,11 @@
+@charset "UTF-8";
+@import '~dhtmlx-scheduler/codebase/dhtmlxscheduler_flat.css';
+
+:host{
+   display: block;
+   height: 100%;
+   position: relative;
+   width: 100%;
+}
+.dhx_cal_navline div {top:0;}
+.dhx_cal_header .dhx_agenda_line, .dhx_cal_header .dhx_agenda_line div, .dhx_scale_bar {line-height:14px;}

@@ -1,0 +1,15 @@
+.mail-subject {font-size:2em; font-weight: 600; display:block; width:100%; padding: 12px 0 6px;}
+.mail-detail-header {position:relative; display:block; min-height:60px; margin:10px 0 30px;}
+.mail-detail-header:after {display:table; clear:both; float:none; width:100%;}
+.mail-detail-header .mark {display:block; position:absolute; width:27px; height:16px; top:calc(50% - 8px); left:-10px;
+  background:rgba(50,58,69, .4); clip-path: polygon(0 0, 100% 0, 75% 50%, 100% 100%, 0 100%);}
+.mail-detail-header.flagged .mark {background: #e21900;}
+.mail-date {position:absolute; top:10px; right:10px; color:rgba(50,58,69, .4)}
+.mail-icon {width:60px; height:60px; display:block; float:left; margin: 0 10px 0 30px; border-radius: 50%; line-height:60px;
+  color:white; text-align:center; font-size:2em; background:rgb(50,58,69);}
+.mail-from-to {display: table-cell; min-height: 60px; height: 60px; vertical-align: middle;}
+.mail-from {padding: 2px 0; width:100%; display:inline-block;}
+.mail-to {padding: 2px 0; color:rgba(50,58,69, .8); display: inline-block;}
+
+.mail-reply-button {display:table; position:fixed; right:15px; bottom:15px; background:rgba(50,58,69,.6); border-radius: 50%; width:40px; height:40px;}
+.mail-reply-button:after { font-family: dripicons; content:"\e03b"; display:table-cell; vertical-align: middle; text-align: center; font-size:2em; color:white;}

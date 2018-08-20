@@ -1,0 +1,6 @@
+<p class="card " draggable="true" (dragstart)="dragStart($event)"
+   id="{{card.id}}" [ngClass]="{'need-to-confirm': card.confirming }" >
+  <b> {{card.title}}</b>
+ {{card.desc}}
+  <span>{{card.update}}</span>
+</p>

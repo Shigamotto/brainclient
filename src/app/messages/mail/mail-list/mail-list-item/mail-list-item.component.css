@@ -1,0 +1,17 @@
+.mail-lst-i-a     {display:table; width:100%; text-decoration: none; color:black; padding:3px 0; }
+.mail-lst-i-a:hover {background-color: rgba(0,0,0,.05);}
+.mail-lst-option  {display:table-cell; width:50px; position:relative; padding-left:16px; text-align:center; vertical-align: middle; overflow:hidden;}
+.mail-lst-option .mark {display:block; position:absolute; width:18px; height:10px; top:calc(50% - 5px); left:-6px;
+  background:rgba(50,58,69, .4); clip-path: polygon(0 0, 100% 0, 75% 50%, 100% 100%, 0 100%);}
+.mail-lst-i-a.flagged .mail-lst-option .mark {background: #e21900;}
+.mail-lst-option .mark:hover {left:0px}
+.mail-lst-date    {display:table-cell; width: 80px; text-align:center; vertical-align: middle;}
+.mail-lst-from    {display:table-cell; width: 25%; padding-right:20px; vertical-align: middle;}
+.mail-icon {display:inline-block; border-radius: 50%; width:28px; height:28px; background:rgba(50,58,69,.7); line-height:30px; text-align:center; color:white; margin-right:5px;}
+.mail-lst-subject {display:table-cell; width: calc(75% - 80px - 50px - 10px); position:relative; vertical-align: middle;}
+.mail-lst-seen {display:table-cell; width:20px;vertical-align: middle; text-align: center;}
+.mail-lst-i-a .mail-lst-seen:before {display: inline-block; content:''; width:10px; height:10px; box-shadow: 0 0 3px rgba(0,0,0,0.2);
+  border:1px solid rgba(50,58,69, .4); background: transparent; border-radius: 50%; }
+
+.mail-lst-i-a.unseen {font-weight: 700;}
+.mail-lst-i-a.unseen .mail-lst-seen:before {background-color: rgb(50,58,69); border:none;}

@@ -1,0 +1,17 @@
+<nav class="promo-menu">
+    <div class="promo-search">
+        <label for="search" class="promo-search-label">Что тебя волнует? </label>
+        <input type="text" class="promo-search-input">
+        <button class="promo-search-button" (click)="doSearch()">Отправить</button>
+    </div>
+    <ul class="promo-menu-items">
+        <li class="promo-menu-item">Присоединиться</li>
+        <li class="promo-menu-item" (click)="SignInFormOpen()">Войти</li>
+    </ul>
+</nav>
+<div class="modal" [ngClass]="{'open': signinFormOpen}">
+    <div class="modal-bg"></div>
+    <div class="modal-body">
+        <app-signin></app-signin>
+    </div>
+</div>

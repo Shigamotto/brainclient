@@ -1,0 +1,15 @@
+<div class="agenda">
+    <div *ngFor="let task of tasks; let i = index;"
+        class="agenda-task {{ task.status }}" >
+        <div class="agenda-task-date"
+             *ngIf="(i > 0 ? task.date != tasks[i-1].date: true)">
+                {{ task.date }}
+        </div>
+        <div class="agenda-task-info" [routerLink]="['/projects', task.id ]">
+            <div class="agenda-task-hours">{{ task.hours }}</div>
+            <div class="agenda-task-title">{{ task.title }}</div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,24 @@
+<div class="row">
+      <form (ngSubmit)="onSignin(f)" #f="ngForm" class="col-xs-12 ">
+      <div class="form-group">
+        <input
+                class="signin-login"
+                placeholder="Логин"
+                type="email"
+                id="email"
+                name="email"
+                ngModel >
+      </div>
+      <div class="form-group">
+        <input
+                class="signin-pass"
+                placeholder="Пароль"
+                type="password"
+                id="password"
+                name="password"
+                ngModel>
+      </div>
+      <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Войти</button>
+    </form>
+</div>
+

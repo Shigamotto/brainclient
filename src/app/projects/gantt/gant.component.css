@@ -1,0 +1,10 @@
+@charset "UTF-8";
+@import '~dhtmlx-gantt/codebase/dhtmlxgantt.css';
+/* @import "../../../../node_modules/dhtmlx-gantt/codebase/dhtmlxgantt.css"; */
+
+:host{
+   display: block;
+   height: 600px;
+   position: relative;
+   width: 100%;
+}

@@ -1,0 +1,16 @@
+<tr (click)="onClick()" class="bk-lst-i-a">
+    <td class="bk-lst-date">{{ sheet.date_pub }}</td>
+    <td class="bk-lst-title">{{ sheet.title }}</td>
+    <td class="bk-lst-status-pay">{{ sheet.status_pay }}</td>
+    <td class="bk-lst-status-get">{{ sheet.status_get }}</td>
+    <td class="bk-lst-amount expense">{{ sheet.amount }}</td>
+</tr>
+<tbody *ngIf="clicked" class="bk-lines">
+    <tr *ngFor="let line of sheet.lines; let iLine = index" class="bk-line-i" >
+        <td class="close" rowspan="0" *ngIf="iLine == 0" (click)="onClose()"></td>
+        <td class="bk-line-name">{{ line.name}}</td>
+        <td class="bk-line-price">{{ line.price}}</td>
+        <td class="bk-line-count">{{ line.count }}</td>
+        <td class="bk-line-amount">{{ line.amount }}</td>
+    </tr>
+</tbody>

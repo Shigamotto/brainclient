@@ -1,0 +1,9 @@
+.promo {display:table; vertical-align: middle; text-align:center;
+  position:relative; top:0; left:0; right:0; bottom:0; width:100%; height:100vh;}
+.promo-bg-block {display:block; position:absolute; top:0; left:0; width:100%; height:100%; overflow:hidden;}
+.promo-bg {display:block; position:absolute; top:0; left:0; min-width:100%; width:auto; min-height:100%; height:auto; z-index:-100;}
+.promo-inner {display:table-cell; vertical-align: middle; position:relative; z-index:999;}
+.promo-search-label {color:rgb(50,58,69); font-size:16px; }
+.promo-search {border:0; border-bottom: 1px solid rgba(50,58,69,.6); padding:10px 15px; background:transparent; font-size:16px;}
+.promo-button {border: 1px solid rgba(50,58,69,1); opacity:.5; color:rgb(50,58,69); font-size:16px; padding:10px 15px; border-radius:0; background:transparent}
+.promo-button:hover {opacity:1;}

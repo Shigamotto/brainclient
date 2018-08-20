@@ -1,0 +1,65 @@
+<form [formGroup]="sheetForm" >
+    <div class="bkd-header">
+        <input formControlName="title"
+               class="bkd-title"
+               type="text"
+               id="title"
+               placeholder="Title" >
+        <div class="bkd-info">
+            <input class="bkd-amount"
+                   type="text"
+                   id="amount"
+                   formControlName="amount"
+                   placeholder="0" >
+            <div class="bkd-simple" (click)="sheetSimpleToggle()"></div>
+            <input class="bkd-date"
+                   type="text"
+                   id="date_pub"
+                   formControlName="date_pub" >
+        </div>
+    </div>
+    <div class="bkd-whom open">
+        <div class="from">
+            <label for="from" class="bk-lab">From</label>
+            <input class="bk-in"
+                   type="text"
+                   id="from"
+                   placeholder="..." >
+        </div>
+        <div class="to">
+            <label for="to" class="bk-lab">To</label>
+            <input class="bk-in"
+                   type="text"
+                   id="to"
+                   placeholder="..." >
+        </div>
+    </div>
+    <textarea autosize formControlName="desc"
+              class="bkd-desc"
+              id="desc"
+              rows="6"></textarea>
+    <tbody class="bk-lines" formArrayName="lines">
+        <tr *ngFor="let lineCtrl of sheetForm.get('lines').controls; let i = index"
+            [formGroupName]="i"
+            class="bk-line-i">
+            <td class="bk-line-name">
+                <input formControlName="name" type="text" class="bk-in">
+            </td>
+            <td class="bk-line-price">
+                <input formControlName="price" type="text" class="bk-in">
+            </td>
+            <td class="bk-line-count">
+                <input formControlName="count" type="text" class="bk-in">
+            </td>
+            <td class="bk-line-amount">
+                <input formControlName="amount" type="text" class="bk-in">
+            </td>
+        </tr>
+    </tbody>
+    <button type="button" class="btn add-line" (click)="addNewLine()">T</button>
+    <div class="bk-btn">
+        <button type="submit" [disabled]="!sheetForm.valid"
+                class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+    </div>
+</form>

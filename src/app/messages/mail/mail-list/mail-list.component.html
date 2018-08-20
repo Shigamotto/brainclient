@@ -1,0 +1,8 @@
+<div class="mail-lst">
+    <app-mail-list-item
+            class="mail-lst-i"
+            *ngFor="let mailEl of messages; let i = index"
+            [mail]="mailEl"
+            [index]="i">
+    </app-mail-list-item>
+</div>

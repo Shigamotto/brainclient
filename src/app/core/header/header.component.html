@@ -1,0 +1,35 @@
+
+    <form class="topbar-form">
+        <input type="text" placeholder="Enter text..." class="topbar-input" [(ngModel)]="inputVal" [ngModelOptions]="{standalone: true}">
+        <button class="topbar-i search" (click)="makeSearch()"></button>
+        <button class="topbar-i task" (click)="makeTask()" *ngIf="inputVal"></button>
+        <button class="topbar-i booksheet" (click)="makeBooksheet()" *ngIf="inputVal"></button>
+        <button class="topbar-i mail" (click)="makeMail()" *ngIf="inputVal"></button>
+        <div class="clock" *ngIf="!inputVal" (click)="StartTimer()">{{ time | date:'HH:mm:ss' }}</div>
+        <div class="timer" *ngIf="startTimer" (click)="PauseTimer()">{{ timer }}</div>
+    </form>
+    <div class="topbar-notice">
+        <app-header-shared></app-header-shared>
+        <div *ngIf="widget" class="widget">{{ widget }}</div>
+        <div *ngIf="status" class="status {{ status }}"></div>
+        <div *ngIf="attach" class="attach">
+            <ul class="attach-list">
+                <li *ngFor="let att of attach">{{ att.name }}</li>
+            </ul>
+        </div>
+        <div class="topbar-mode" [ngClass]="{'user': !profile.ltdmode }">
+            <span class="mode" (click)="settingsService.toggleLTDMode()"></span>
+            <div *ngIf="profile.ltdmode" class="chose-ltd" [ngClass]="{'opened':this.choseLTD}">
+                <span class="chose-ltd-toggle"
+                      (click)="toggleChoseLTD()" ></span>
+                <ul  class="choses-ltd">
+                    <li *ngFor="let organization of profile.organization"
+                        class="chose-ltd-item"
+                        (click)="ChoseLTD(organization.id)"
+                        [ngClass]="{'active':organization.id == profile.chose_organization }">
+                        {{ organization.name }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>

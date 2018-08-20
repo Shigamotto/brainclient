@@ -1,0 +1,10 @@
+<tbody class="bk-lines">
+    <tr class="bk-line-i"
+         *ngFor="let bom of boms; let i = index"
+        [routerLink]="[bom.id]" >
+        <td class="bom-line-index">{{ i+1 }}</td>
+        <td class="bom-line-name">{{ bom.name }}</td>
+        <td class="bom-draft" [ngClass]="{'confirmed': !bom.draft}"></td>
+    </tr>
+</tbody>
+

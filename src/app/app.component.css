@@ -1,0 +1,7 @@
+.container { margin-left:40px; margin-top:40px; padding: 10px; position:relative; width:calc(100% - 40px);
+  height:calc(100vh - 40px); transition:1s ease;}
+.container.menu-open { margin-left:240px; width:calc(100% - 240px);}
+
+app-header {position: fixed; display:block; top:0; left:40px; right:0; height:40px; width:calc(100% - 40px);
+  box-shadow: 0 0 10px rgba(0,0,0,0.5); padding: 0 10px;z-index:9998; background:white; transition:1s ease;}
+app-header.menu-open {width:calc(100% - 240px); left:240px;}

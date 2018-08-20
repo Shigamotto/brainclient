@@ -1,0 +1,9 @@
+<mpb-dialog-list-item
+    class="mail-lst-i"
+    *ngFor="let dialogEl of dialogs; let i = index"
+    [index]="i"
+    [dialog]="dialogEl"
+    [ngClass]="{'unseen':dialogEl.unseen}"
+    [routerLink]="['/messages/bp', dialogEl.id ]"
+    routerLinkActive="active">
+</mpb-dialog-list-item>

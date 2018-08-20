@@ -1,0 +1,31 @@
+<div class="bkd-header">
+    <div class="bkd-title">{{ bom.name }}</div>
+    <div class="bkd-info">
+        <div class="bkd-draft"
+             [ngClass]="{'confirmed': !bom.draft}"
+             (click)="conformBOM()"></div>
+        <div class="mode" [ngClass]="{'extra':extraMode}" (click)="bomChangeMode()"></div>
+        <div class="bkd-date">{{ bom.date_pub }}</div>
+    </div>
+</div>
+<div class="bkd-whom" >
+    <div class="from"></div>
+    <div class="to"></div>
+</div>
+<div class="bkd-desc" [innerHTML]="bom.desc"></div>
+<tbody class="bk-lines" [ngClass]="{'hide':extraMode}">
+    <app-bom-detail-material
+            class="bk-line-i"
+            *ngFor="let material of bom.bill; let i = index"
+            [materialBOM]="material"
+            [index]="i">
+    </app-bom-detail-material>
+</tbody>
+<tbody class="bk-lines" [ngClass]="{'hide':!extraMode}" >
+    <app-bom-detail-material
+            class="bk-line-i"
+            *ngFor="let material of bom.bill_extra; let i = index"
+            [materialBOM]="material"
+            [index]="i">
+    </app-bom-detail-material>
+</tbody>

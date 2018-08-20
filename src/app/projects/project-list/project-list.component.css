@@ -1,0 +1,9 @@
+.line-i.task {cursor:pointer;}
+.line-i.task.confirmed {opacity:.6;}
+
+.task.over .line-status {background-color: #e21900}
+.task .sub {margin-top:1px;}
+.task .sub-line {line-height:38px;}
+.sub-hover .sub-line.pub-date {background-color: #3399cc;color:white;}
+.sub-hover .sub-line.end-date {background-color: #e6db74;}
+.sub-hover .sub-line.dead-date {background-color: #e21900;color:white;font-weight:900;}

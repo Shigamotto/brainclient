@@ -1,0 +1,24 @@
+<div class="bkd-header">
+    <div class="bkd-title">{{ warehouse.name }}</div>
+    <div class="bkd-info">
+        <div class="bkd-simple"></div>
+        <!-- последняя дата обновления -->
+        <div class="bkd-date" ></div>
+    </div>
+</div>
+
+<!-- данные владельца -->
+<div class="bkd-whom">
+    <div class="from"></div>
+    <div class="to"></div>
+</div>
+<!-- реквизиты -->
+<div class="bkd-desc"></div>
+<tbody class="bk-lines">
+    <tr *ngFor="let line of warehouse.list" class="bk-line-i" >
+        <td class="bk-line-name">{{ line.name}}</td>
+        <td class="bk-line-price">{{ line.value}}</td>
+        <!-- поддерживать ли на складе -->
+        <td class="bk-line-count" [ngClass]="{'keeped':line.keep}"></td>
+    </tr>
+</tbody>

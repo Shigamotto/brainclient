@@ -1,0 +1,8 @@
+.agenda-task {margin-bottom:10px;}
+.agenda-task:last-of-type {margin:0;}
+.agenda-task-date {display:block;float:none; border-bottom:2px solid rgb(226,25,0);
+  color:rgb(226,25,0); font-size:18px; font-weight:900;margin:0 10px 10px 10px; padding:5px;}
+.agenda-task-info {display:table; width:100%; cursor:pointer;}
+.agenda-task-info:hover {background-color:rgba(0,0,0,.1)}
+.agenda-task-hours {display:table-cell; width:40%; padding:10px 10px 10px 15px; color:rgba(0,0,0,.4);}
+.agenda-task-title {display:table-cell; width:60%;}

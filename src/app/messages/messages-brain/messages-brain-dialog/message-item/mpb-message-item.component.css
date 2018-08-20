@@ -1,0 +1,9 @@
+:host {display:block; width:100%;}
+.message {display:block; max-width:400px; float:left;background:rgba(50,58,68,.08);
+border-radius:5px; padding:12px; margin: 12px 30px 16px;}
+:host.self .message{float:right; text-align:right;}
+:host:after {content:'';display:table;width:100%;clear:both;float:none;}
+
+.dialog-message-user {font-weight:900;color:rgb(50,58,68);display:block; margin-bottom:8px; text-decoration:none;}
+.dialog-message-date {color:#999999; float:right; position:relative;
+  display:inline-block;bottom:-8px;font-size:.7em; margin-left:20px;}

@@ -1,0 +1,9 @@
+<app-menu (onOpen)="menuOpen($event)" [ngClass]="{'promo': authService.isAuthenticated()}"></app-menu>
+<app-header [ngClass]="{
+    'menu-open': headerService.menuOpened,
+    'promo': authService.isAuthenticated()
+    }"></app-header>
+<div class="container" [ngClass]="{'menu-open': headerService.menuOpened}">
+  <router-outlet></router-outlet>
+</div>
+<router-outlet name="search"></router-outlet>

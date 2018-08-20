@@ -1,0 +1,90 @@
+<form [formGroup]="profileForm" >
+<div class="profile-settings-main">
+    <div class="profile-settings-avatar">
+        <input formControlName="image"
+                       type="hidden"
+                       id="image"
+                       class="settings-input"
+                       placeholder="Image" >
+        <div class="settings-avatar"
+             [ngClass]="{
+                'normal': avatarView == 'normal',
+                'triangle': avatarView == 'triangle',
+                'circle': avatarView == 'circle'
+             }">
+            <img src="https://pp.userapi.com/c4920/u1736036/-6/w_db7cc8ac.jpg">
+            <!-- {{ profile.image }} -->
+        </div>
+        <ul class="settings-avatar-mode">
+            <li (click)="changeAvatarView('normal')" class="mode"></li>
+            <li (click)="changeAvatarView('triangle')" class="mode"></li>
+            <li (click)="changeAvatarView('circle')" class="mode"></li>
+        </ul>
+    </div>
+    <div class="profile-settings-names">
+        <div class="settings-names">
+            <input formControlName="username"
+                       type="text"
+                       id="username"
+                       class="settings-input"
+                       placeholder="Username" >
+            <input formControlName="first_name"
+                       type="text"
+                       id="first_name"
+                       class="settings-input"
+                       placeholder="First name" >
+            <input formControlName="last_name"
+                       type="text"
+                       id="last_name"
+                       class="settings-input"
+                       placeholder="Last name" >
+            <textarea id="description">Description</textarea>
+        </div>
+    </div>
+</div>
+<div class="profile-settings-organizations" formArrayName="organizations">
+    <div class="profile-settings-heading">Организации</div>
+    <ul class="profile-organizations">
+        <li *ngFor="let organizationCtrl of profileForm.get('organizations').controls; let i = index"
+            [formGroupName]="i"
+            class="profile-organization" >
+            <div class="ltd-image">
+                <input formControlName="id" type="hidden">
+                <input formControlName="name" type="text" class="table-input org-name" placeholder="Title">
+            </div>
+            <div class="ltd-block"></div>
+        </li>
+        <button type="button" class="btn add-line" (click)="addNewOrganization()"></button>
+    </ul>
+</div>
+<div class="profile-settings-mailboxes">
+    <div class="profile-settings-heading">Сообщения</div>
+    <ul class="profile-mailboxes" formArrayName="mailboxes">
+        <li *ngFor="let mailboxCtrl of profileForm.get('mailboxes').controls; let i = index"
+            [formGroupName]="i"
+            class="profile-mailbox" >
+            <div class="mailbox-head">
+                <input formControlName="boxfetch" type="number" type="text" class="table-input mail-fetch" placeholder="5">
+                <input formControlName="boxuser" type="text" class="table-input mail-user" placeholder="username">
+            </div>
+            <div class="mailbox-block">
+                <input formControlName="boxpass" type="text" class="table-input" placeholder="password">
+                <input formControlName="boxserv" type="text" class="table-input" placeholder="server name">
+                <select formControlName="boxtype" class="mailbox-select">
+                    <option value="imap">IMAP</option>
+                    <option value="imapssl" selected>IMAP SSL</option>
+                    <option value="pop3">POP3</option>
+                    <option value="pop3ssl">POP3 SSL</option>
+                </select>
+            </div>
+        </li>
+        <button type="button" class="btn add-line" (click)="addNewMailbox()"></button>
+    </ul>
+</div>
+
+    <div class="bk-btn">
+        <button type="submit" [disabled]="!profileForm.valid"
+                class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+    </div>
+</form>

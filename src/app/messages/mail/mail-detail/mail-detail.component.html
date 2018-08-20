@@ -1,0 +1,14 @@
+<div>
+    <div class="mail-subject">{{ message.subject }}</div>
+    <div class="mail-detail-header {{ message.flags }}">
+        <span class="mark" ></span>
+        <div class="mail-date">{{ message.date }}</div>
+        <div class="mail-icon">ОБ</div>
+        <div class="mail-from-to">
+            <span class="mail-from">{{ message.msg_from }}</span>
+            <span class="mail-to">{{ message.msg_to }}</span>
+        </div>
+        <a class="mail-reply-button"></a>
+    </div>
+    <div class="mail-detail-body" [innerHTML]="message.body | safeHtml">Loading...</div>
+</div>

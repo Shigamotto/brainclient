@@ -1,0 +1,13 @@
+.bom-line-index {width:40px; text-align:center;}
+.bom-line-name {padding:10px 10px 10px 20px; display:table-cell;
+  width:calc(100% - 80px); border-left:1px solid white;}
+.bk-lines {width:100%; display:table; border-spacing: 0 1px}
+.bk-lines.hide {display:none}
+.bk-line-i {display:table-row; width:100%; background-color: rgba(0,0,0,.02); border-top:1px;}
+.bk-line-i:hover {background-color: rgba(0,0,0,.04);}
+
+.bom-draft {font-family: dripicons; width:40px; height:40px; line-height:40px; text-align:center;
+background: rgb(230, 219, 116); display:block; font-size:2em; color:white; float:right}
+.bom-draft:after {content:"\e052"; display:inline-block;}
+.bom-draft.confirmed {background: rgb(50,58,68);}
+.bom-draft.confirmed:after {content: "\53"; }

@@ -1,0 +1,8 @@
+:host {display:block;position:absolute;width:100%;padding:12px 12px 16px;bottom:0;left:0;right:0;
+  background:rgba(50,58,68,.14);}
+:host textarea {background:rgba(255,255,255,.7); border:0; border-radius:0; width:calc(100% - 36px);
+line-height:12px; font-size:12px;padding:4px 7px}
+:host button {display:block;color:transparent;float:right;border:0;padding:0; text-align:center;
+  background-color:rgba(59,58,68,.1); width:30px; height:30px;}
+:host button:after{display:inline-block; content:"\56"; line-height:30px;
+  font-family:dripicons;font-size:21px; color:white}

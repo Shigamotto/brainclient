@@ -1,0 +1,6 @@
+.bk-line-index {width:40px; text-align:center;}
+.bk-line-name, .bk-line-desc {padding:10px 10px 10px 20px; display:table-cell;
+  width:calc(50% - 100px); border-left:1px solid white;}
+.bk-line-desc {color:rgba(0,0,0,.3)}
+.bk-line-value, .bk-line-cost, .bk-line-amount {width:80px; vertical-align:middle;
+  padding:10px; text-align:right; border-left:1px solid white; }

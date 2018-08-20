@@ -1,0 +1,19 @@
+.promo-menu {position:fixed; top:0; left:0; right:0; width:100%; z-index:9999; background:rgb(50,58,69);}
+.promo-search {display: inline-block;line-height:40px; padding:25px 0;}
+.promo-search-label {color:rgb(241, 91, 42); font-weight:700; font-size:14px; padding:0 10px 0 20px;}
+.promo-search-input,
+.promo-search-button {background:transparent; line-height:40px;padding:0 20px;
+  font-size:14px; border:1px solid #242731; color:white; transition: .5s ease .1s;}
+.promo-search-button:hover {opacity:.6; cursor: pointer;}
+
+.promo-menu-items {margin:0; display:block; float:right;padding:25px 0;}
+.promo-menu-item {display:inline-block; list-style: none; line-height:40px; padding:0 15px;
+  background:rgba(50,58,68,.6); color:white; margin-right:6px; cursor: pointer;}
+.promo-menu-item:first-of-type {background:rgb(241, 91, 42);}
+.promo-menu-item:hover {background: transparent; border: 1px solid #242731;line-height:38px; padding: 0 14px;}
+.right {float:right; }
+.left {float:left; display:none;}
+.modal {position: fixed; left:100%; right:-100%; top:105px;
+  padding:10px; color:white; background:#323a45;
+  z-index:9999; transition:1s ease; }
+.modal.open {left:auto; right:10px;}

@@ -1,0 +1,26 @@
+p {
+  background: rgba(255,255,255,.5);
+  margin: 0 0 5px 0;
+  padding: 5px 10px;
+  min-height:120px;
+  position:relative;
+}
+p.need-to-confirm {
+  animation: 1.2s ease need-to-confirm infinite;
+}
+b {
+  display:block;
+  font-size:1.2em;
+  margin-bottom:5px;
+}
+span {
+  font-size:.8em;
+  color:gray;
+  position:absolute;
+  bottom:5px;right:10px;
+}
+
+@keyframes need-to-confirm {
+  0%,100% {opacity:.1; transform: scale3d(.95,.95,.95)}
+  50% {opacity: 1; transform: scale3d(1,1,1)}
+}

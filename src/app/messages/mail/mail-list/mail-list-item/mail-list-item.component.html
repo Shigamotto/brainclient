@@ -1,0 +1,13 @@
+<tr [routerLink]="[mail.user, mail.id ]" routerLinkActive="active" class="mail-lst-i-a {{ mail.flags }}">
+    <td class="mail-lst-option">
+        <span class="mark" ></span>
+        <input type="checkbox" value="{{ mail.id }}">
+    </td>
+    <td class="mail-lst-from">
+        <div class="mail-icon">ОБ</div>
+        {{ mail.msg_from }}
+    </td>
+    <td class="mail-lst-seen"></td>
+    <td class="mail-lst-subject">{{ mail.subject }}</td>
+    <td class="mail-lst-date">{{ mail.date }}</td>
+</tr>

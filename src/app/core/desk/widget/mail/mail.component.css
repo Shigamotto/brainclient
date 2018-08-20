@@ -1,0 +1,4 @@
+.line-i {cursor:pointer;}
+.line-i.unseen .line-name, .line-i.unseen .line-date {font-weight:900;}
+.line-i.flagged .line-status{background:rgb(226,25,0)}
+.line-status:before {display:none;}

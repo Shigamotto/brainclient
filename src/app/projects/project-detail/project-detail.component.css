@@ -1,0 +1,31 @@
+.bkd-header {display:table; width:100%; position:relative; background:white;}
+.bkd-title {width:100%; min-height: 40px; display:table-cell; height:40px;
+  vertical-align: middle; padding: 0 20px; font-size:1.4em; }
+/*.bkd-title:after {display:block; float:right; content:''; width:140px; height:40px;}*/
+.bkd-info {width:100%; position:absolute; bottom:0; right:0; display:block;}
+.bkd-date  {display:block; height:40px; float:right;
+  line-height:40px; text-align:center; padding:0 20px;
+  background: rgba(50,58,69,.04);}
+.bkd-info-toggle {font-family: dripicons; width:40px; height:40px; line-height:40px; text-align:center;
+background: rgb(50,58,68); display:block; font-size:2em; color:white; float:right}
+.bkd-info-toggle:after {content: "\e057";display:inline-block}
+
+.bkd-simple {font-family: dripicons; width:40px; height:40px; line-height:40px; text-align:center;
+background: rgb(50,58,68); display:block; font-size:2em; color:white; float:right}
+.bkd-simple:after {content: "\53"; display:inline-block;}
+
+.bkd-whom {width:100%;height:0;background-color:rgb(50,58,68);position:relative; overflow:hidden;color:white;}
+.bkd-whom.open {height:auto; display:table; padding:8px 12px; }
+
+.bkd-whom .created_by {display:inline-block;float:right; font-size:1.4em;}
+.bkd-whom .assigned_to {display:inline;}
+
+.bkd-desc {background:rgba(50,58,69,.04); display:block; width:100%; min-height: 40px; vertical-align: middle; padding:20px; }
+
+.bk-lines {width:100%; display:table; border-spacing: 0 1px}
+.bk-line-i {display:table-row; width:100%; background-color: rgba(0,0,0,.02); border-top:1px;}
+.bk-line-i:hover {background-color: rgba(0,0,0,.04);}
+.bk-line-name {padding:10px 10px 10px 20px;}
+.bk-line-price, .bk-line-count, .bk-line-amount {width:100px; vertical-align:middle; padding:10px; text-align:right; border-left:1px solid white;}
+
+

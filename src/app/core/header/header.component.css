@@ -1,0 +1,64 @@
+.topbar-input {background:transparent; border:0; border-radius: 0; border-bottom:1px solid #eee; font-size:12px;  margin-right:10px; display:block; float:left; padding:4px 12px;height:24px; margin-top:8px; width:200px;}
+.topbar-i {display:inline-block; border:none; border-radius:0; background: transparent; width:40px; height:40px; line-height:40px; padding:0; margin:0; float:left; text-align:center;}
+.topbar-i:hover {background:rgba(0,0,0,.1);}
+.topbar-i:after {font-family: dripicons; content: ""; font-size:18px;}
+.topbar-i.search:after {content:"\e041"}
+.topbar-i.task:after {content:"\078"}
+.topbar-i.booksheet:after {content:"\e062"}
+.topbar-i.mail:after {content:"\e015"}
+
+.clock, .timer {height:40px; padding:0 12px; background-color: rgba(50,58,69,.04); font-size:1.4em; display:block; float:left; color:rgb(50,58,69); line-height:40px;}
+.timer {background:rgba(226,25,0,.1); }
+
+.topbar-notice {display:inline-block; float:right; line-height:40px; font-size:1.4em;}
+.topbar-notice .widget {display:block; margin-right:10px; float:left;}
+.topbar-notice .status {min-width:40px; height:40px; font-size:1.4em; font-family: dripicons; display:inline-block;}
+.topbar-notice .status:after, .topbar-notice .status:before {display:inline-block;text-align:center; /*content: "\e067";*/
+  width:40px; line-height:40px; background: rgba(0, 226, 25, .2); border-left:1px solid white; color:white;}
+.topbar-notice .status.paid:before {content: "\53";}
+.topbar-notice .status.move:before {content: "\e043";}
+.topbar-notice .status.not-paid:before {content: "\39";}
+
+.topbar-notice .status.wait:after {content: "\e046"; background: rgba(226, 226, 25, .3);}
+.topbar-notice .status.sent:after {content: "\e03f";}
+.topbar-notice .status.get:after {content: "\e044";}
+.topbar-notice .status.produced:after {content: "\e02a";}
+.topbar-notice .status.write-off:after {content: "\e053";}
+
+.topbar-mode {display:inline-block; float:right; line-height:40px; }
+.topbar-mode .mode {width:40px; height: 40px; line-height:40px; display:inline-block;position:relative;
+  text-align:center; overflow:hidden; white-space: nowrap;}
+.topbar-mode .mode:before {font-family: dripicons; font-size:1.4em; display:inline-block; width:40px; height:40px; content:"\e057";
+  background:rgba(50,58,68,.95); margin-left:0; transition:.3s ease; color:white;}
+.topbar-mode .mode:after {font-family: dripicons; font-size:1.4em; display:inline-block; width:40px; height:40px; content:"\e056";
+  background:rgba(50,58,68,.1);}
+
+.topbar-mode.user .mode:before {margin-left:-40px;}
+
+.chose-ltd {display:block; position:fixed; right:0; top:0;}
+.chose-ltd .choses-ltd {display:none}
+.chose-ltd.opened .choses-ltd {display:block;position:relative;padding:0;margin:0;
+  list-style:none;top:40px;right:10px;background:rgb(248,248,248);}
+.chose-ltd-item {padding: 10px 40px 10px 20px;color:rgba(0,0,0,.6);border-bottom:1px solid white; font-size:12px;}
+.chose-ltd-item:hover {cursor:pointer;background:rgba(0,0,0,.1); color:black;}
+.chose-ltd-item.active {background:rgba(0,0,0,.05); color:rgba(0,0,0,.4);}
+.chose-ltd-item:last-of-type {border-bottom:0;}
+.chose-ltd-toggle {display:block;width:10px;height:40px; position:absolute;right:0; top:0;
+  background-color:rgb(50,58,68); cursor:pointer;}
+
+
+/*
+
+.topbar-mode .o-mode, .topbar-mode .u-mode {opacity:0; transition:.6s ease}
+.topbar-mode:hover .o-mode, .topbar-mode:hover .u-mode {opacity:1;}
+.o-mode {color:#F36}
+.u-mode {color:rgba(0,0,0,.38);}
+
+
+mat-slide-toggle.chose-mode {margin:0 0 0 10px;}
+/deep/ mat-slide-toggle.chose-mode .mat-slide-toggle-thumb-container {width:14px;height:14px; top:-2px;}
+/deep/ mat-slide-toggle.chose-mode .mat-slide-toggle-thumb {width:14px; height:14px; border-radius: 50%; background:white;
+  box-shadow: 0 2px 1px -1px rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 1px 3px 0 rgba(0,0,0,.12);}
+/deep/ mat-slide-toggle.chose-mode .mat-slide-toggle-bar { height:11px; width:30px; position: relative;
+  background-color: rgba(0,0,0,.38); border-radius:6px; top:2px;}
+*/

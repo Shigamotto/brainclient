@@ -1,0 +1,6 @@
+.desk-item {margin-right:10px; position:relative; margin-bottom:10px;display:block;float:left;}
+.desk-item.news {width:calc(50% - 5px); height:320px; }
+.desk-item.budget {width:calc(25% - 10px / 4); height:320px; }
+.desk-item.budget:nth-child(2n+1) {margin-right:0;}
+.desk-item.mail {width:calc(50% - 5px);}
+.desk-item.agenda {width:calc(25% - 10px / 4); margin-right:0;}

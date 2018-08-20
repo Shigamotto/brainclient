@@ -1,0 +1,35 @@
+.bkd-header {display:table; width:100%; position:relative; background:white;}
+.bkd-title {width:100%; min-height: 40px; display:table-cell; height:40px;
+  vertical-align: middle; padding: 0 20px; font-size:1.4em; border:0;}
+/*.bkd-title:after {display:block; float:right; content:''; width:140px; height:40px;}*/
+.bkd-info {position:absolute; bottom:0; right:0; display:inline-block;}
+.bkd-date, .bkd-amount {display:block; height:40px; float:right;
+  line-height:40px; width:100px; text-align:center;
+  background: rgba(50,58,68,.04); border:0;}
+.bkd-amount {font-size:1.4em; background-color:rgba(50,58,68, 0)}
+.bkd-simple {font-family: dripicons; width:40px; height:40px; line-height:40px; text-align:center;
+background: rgb(50,58,68); display:block; font-size:2em; color:white; float:right}
+.bkd-simple:after {content: "\53"; display:inline-block;}
+
+.bkd-whom {width:100%; background-color:rgb(50,58,68); height:0; transition: 1s ease; position:relative}
+.bkd-whom.open {height:auto; display:table;}
+.bkd-whom .from, .bkd-whom .to {width:50%; display:table-cell; border-radius:0; border:0; background:transparent;
+vertical-align: middle; text-align:left; color:white; padding:20px; float:left; color:rgba(255,255,255,.72); }
+.bkd-whom .bk-in {color:white; margin-top:7px;}
+.bkd-whom .to, .bkd-whom .to .bk-in {text-align:right;}
+
+.bkd-whom:before  {content:"\e049"; display:block; position:absolute; font-family: dripicons;
+font-size:16px; color:white; top:calc(50% - 8px); left:calc(50% - 8px);}
+
+.bkd-desc {background:rgba(50,58,69,.04); display:block; width:100% !important; min-height: 40px; vertical-align: middle; padding:20px; border:0;}
+
+.bk-lines {width:100%; display:table; border-spacing: 0 1px}
+.bk-line-i {display:table-row; width:100%; background-color: rgba(0,0,0,.02); border-top:1px;}
+.bk-line-i:hover {background-color: rgba(0,0,0,.04);}
+
+.bk-in {border:0; border-radius:0; background:transparent; display:block; width:100%; padding:0; margin:0;}
+
+.add-line {font-family:dripicons; content:"\54"; padding:2px;}
+
+.bk-btn {display:table; width:100%;margin-top:1px; }
+.bk-btn .btn {display:table-cell; width:50%; float:right;}

@@ -1,0 +1,20 @@
+<div class="bkd-header">
+    <div class="bkd-title">{{ bookSheet.title }}</div>
+    <div class="bkd-info">
+        <div class="bkd-simple" *ngIf="bookSheet.simple" (click)="openWhom()"></div>
+        <div class="bkd-date">{{ bookSheet.date_pub }}</div>
+    </div>
+</div>
+<div class="bkd-whom" [ngClass]="{'open': whomIsOpen}">
+    <div class="from">{{ bookSheet.from }}</div>
+    <div class="to">{{ bookSheet.to }}</div>
+</div>
+<div class="bkd-desc" [innerHTML]="bookSheet.desc"></div>
+<tbody class="bk-lines">
+    <tr *ngFor="let line of bookSheet.lines" class="bk-line-i" >
+        <td class="bk-line-name">{{ line.name}}</td>
+        <td class="bk-line-price">{{ line.price}}</td>
+        <td class="bk-line-count">{{ line.count }}</td>
+        <td class="bk-line-amount">{{ line.amount }}</td>
+    </tr>
+</tbody>

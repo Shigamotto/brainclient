@@ -1,0 +1,62 @@
+.profile-settings-main:after,
+.profile-settings-organizations:after,
+.profile-settings-mailboxes:after {content:'';float:none;clear:both;display:table;position:relative;}
+.profile-settings-heading {width:240px;height:180px;padding:10px;float:left;background:rgb(50,58,68);
+  color:white;font-weight:400; text-align:right; font-size:24px; text-transform: uppercase;}
+.profile-settings-avatar {width:240px; display:block; float:left; margin:0; position:absolute;}
+.settings-avatar.normal {height:360px;}
+.settings-avatar.circle {width:240px; height:240px; border-radius:50%;overflow:hidden;}
+.settings-avatar.triangle { height: 280px; -webkit-clip-path: polygon(0 0, 240px 0, 260px 20px, 0 280px);
+  clip-path: polygon(0 0, 240px 0, 260px 20px, 0 280px); overflow-x: visible; position: relative; }
+.settings-avatar.triangle img {width:260px;top:-100px;max-width:none;position:absolute;}
+.settings-avatar-mode {list-style:none;position:absolute;top:10px;left:10px;z-index:100;margin:0;padding:0;}
+.settings-avatar-mode>.mode {width:8px; height:8px; border:2px solid rgb(201,201,201); display:inline-block; border-radius:50%;}
+.settings-avatar-mode>.mode:hover {background-color:rgba(255,255,255,.2); cursor:pointer;}
+.profile-settings-names {width:calc(100% - 120px); float:right;}
+.profile-settings-names .settings-input {text-align:right;}
+.profile-settings-names #username {background:rgb(248,248,248); color:white; font-size:120px; line-height:120px; padding-left:135px;}
+.profile-settings-names #first_name {font-size:62px; line-height:62px;}
+.profile-settings-names #last_name {font-size:28px; line-height:28px;}
+.profile-settings-names #description {font-size:14px; border:0; border-radius:0; padding:10px 10px 10px 130px; width:100%; height:120px}
+.profile-settings-organizations {padding:10px 0;}
+.profile-organizations, .profile-mailboxes {display:block;width:calc(100% - 240px);list-style:none;padding:0;margin:0;float:right;}
+.profile-organization, .profile-mailbox {display:block;float:left; width:calc(100% / 3 - 10px); height:360px; padding:0; margin:0 0 10px 10px;}
+.profile-organization .ltd-image, .profile-mailbox .mailbox-head {display:block; width:100%; height:180px; background:rgb(50,58,68);position:relative;}
+.profile-organization .ltd-block, .profile-mailbox .mailbox-block {padding:10px 20px; width:100%; height:180px; position:relative; background:rgb(251,251,251);}
+.profile-mailbox .mailbox-block {padding:10px 0;}
+.profile-mailbox .mailbox-head .mail-fetch {position:absolute; top:-20px; right:0; line-height:90px; font-size:90px; color:rgba(255,255,255,.6);padding:0;margin:0;text-align:right;}
+.profile-mailbox .mailbox-head .mail-user, .profile-organization .ltd-image .org-name {position:absolute; bottom:0; right:0; left:0; width:100%; color:white; font-size:24px; padding:0 10px;}
+.profile-organization .ltd-image .org-name {text-align:right;}
+.mailbox-select {border:0; background:transparent; width:100%; padding:0 10px; text-align:center;font-size:21px;}
+
+.table-input,
+.settings-input {width:100%; border:0; border-radius:0; padding: 5px 10px;}
+.table-input {background:transparent;border:0; padding:0 10px 10px; font-size:21px;}
+
+.add-line {display:inline-block; float:left; position:relative;
+  width:calc(100% / 3 - 10px); height: 360px; margin-left:10px;
+  font-family:dripicons; content:"&#xe01f;"; padding:2px;}
+.add-line:after {display:block; position:absolute; content:"\e035"; width:60px; height:60px; font-size:36px; line-height:60px;
+  background:rgba(255,255,255,.4); border-radius: 50%; top:calc(50% - 30px); left:calc(50% - 30px);}
+
+
+
+
+.profile-label {width:240px;}
+.org-lines, .profile-settings {width:100%; display:table;}
+.profile-row {}
+.profile-table-row {display: table-row;width: 100%;background-color: rgba(0,0,0,.02);border-bottom: 1px solid white; margin-bottom:1px}
+
+.settings-cap {font-weight:700; text-align:left; margin: 1px 0; padding:10px;
+  background-color:rgb(50,58,68); color:white}
+.settings-table-head {background-color:rgba(50,58,68,.8); color:white; font-weight:500; border-right:1px solid white}
+.settings-table-head:last-of-type {border-right:0;}
+
+.settings-lines {border-spacing:0;}
+.mailbox-col-serv, .mailbox-col-pass,
+.mailbox-col-user {width:30%; padding:0 5px; border-right:1px solid white;}
+.mailbox-col-type {width:120px; padding:0 5px;border-right:1px solid white;}
+.mailbox-col-fetch {width:80px; padding:0 5px;}
+
+.bk-btn {display:table; width:100%;margin-top:1px; }
+.bk-btn .btn {display:table-cell; width:50%; float:right;}

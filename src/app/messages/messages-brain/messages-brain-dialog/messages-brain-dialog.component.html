@@ -1,0 +1,20 @@
+<div>
+  <div class="dialog-info" *ngIf="dialog.users.length > 1">
+    <div class="dialog-update">{{ dialog.update }}</div>
+    <div class="dialog-users" *ngIf="dialog.users">
+      <span *ngFor="let userEl of dialog.users">
+        {{ userEl.username }}
+      </span>
+    </div>
+  </div>
+  
+  <message-item
+    class="mail-lst-i"
+    *ngFor="let messageEl of dialog.messages; let i = index"
+    [index]="i"
+    [message]="messageEl"
+    [ngClass]="{'unseen':messageEl.unseen, 'self':authService.isUser(messageEl.from)}">
+  </message-item>
+  <message-input
+    [id]="id"></message-input>
+</div>

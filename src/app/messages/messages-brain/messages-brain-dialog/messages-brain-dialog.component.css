@@ -1,0 +1,5 @@
+:host {display:block; position:absolute;top:0;bottom:0;left:362px;right:0;}
+.dialog-info { background: rgba(50,58,68,.04); padding: 12px 30px; display:block; width:100%;}
+.dialog-update {font-weight:100; color:gray; float:right; font-size:.8em;}
+.dialog-users span:after {content:', ';display:inline;}
+.dialog-users span:last-of-type:after {content:''}

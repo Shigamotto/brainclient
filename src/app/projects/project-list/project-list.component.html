@@ -1,0 +1,26 @@
+<ul class="lines">
+    <li *ngFor="let task of tasks"
+        class="line-i task"
+        [ngClass]="{'confirmed': task.status == 5, 'over': task.over}"
+        [routerLink]="['/projects', task.id]"
+    >
+        <div class="line-status task"
+             [ngClass]="{
+                'draft': task.status == 0,
+                'wait-to-work': task.status == 1,
+                'in-work': task.status == 2,
+                'wait-to-confirm': task.status == 3,
+                'rework': task.status == 4,
+                'confirm': task.status == 5
+             }"></div>
+        <div class="line-name">{{ task.title }}</div>
+        <div class="line-date sub-hover">
+            {{ task.date.start }}
+            <ul class="sub">
+                <li class="sub-line pub-date">{{ task.date.pub }}</li>
+                <li class="sub-line end-date">{{ task.date.end }}</li>
+                <li class="sub-line dead-date">{{ task.date.dead }}</li>
+            </ul>
+        </div>
+    </li>
+</ul>

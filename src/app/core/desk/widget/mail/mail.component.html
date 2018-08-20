@@ -1,0 +1,12 @@
+<table class="lines">
+    <tr *ngFor="let mail of messages; let i = index"
+        class="line-i {{ mail.flags }}"
+        [routerLink]="['/mail', mail.user, mail.id ]"
+        routerLinkActive="active" >
+        <td class="line-status">
+            <div class="mail-icon">ОБ</div>
+        </td>
+        <td class="line-name">{{ mail.subject }}</td>
+        <td class="line-date">{{ mail.date }}</td>
+    </tr>
+</table>
