@@ -1,17 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Message } from '../messages.model';
+import {Notification, NotificationsService} from './notifications.service';
+import {Subscription} from 'rxjs';
 
 @Component({
-  selector: 'app-messages-brain',
-  templateUrl: 'messages-brain.component.html',
-  styleUrls: ['messages-brain.component.css']
+  selector: 'app-notifications',
+  templateUrl: 'notifications.component.html',
+  styleUrls: ['notifications.component.css']
 })
-export class MessagesBrainComponent implements OnInit {
-  messages: Message[];
+export class NotificationsComponent implements OnInit {
+  subscription: Subscription;
+  notifications: Notification[];
 
-  constructor() {}
+  constructor(private noteService: NotificationsService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.subscription = this.noteService.notificationsChanged
+      .subscribe((note: Notification[]) => {
+        this.notifications = note;
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  close(id: number) {
+    this.noteService.removeNotification(id);
+  }
 
 }

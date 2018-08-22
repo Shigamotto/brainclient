@@ -66,7 +66,7 @@ export class AutosizeDirective implements AfterViewInit {
     if (formControl && formControl.valueChanges) {
       formControl.valueChanges.subscribe(() => this.resizeToFitContent());
     }
-    console.log('textarea check');
+    // console.log('textarea check');
   }
 
   /** Sets the minimum height of the textarea as determined by minRows. */

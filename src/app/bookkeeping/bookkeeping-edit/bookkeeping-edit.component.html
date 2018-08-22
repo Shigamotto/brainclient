@@ -1,4 +1,4 @@
-<form [formGroup]="sheetForm" >
+<form [formGroup]="sheetForm" (ngSubmit)="onSubmit()">
     <div class="bkd-header">
         <input formControlName="title"
                class="bkd-title"
@@ -18,7 +18,7 @@
                    formControlName="date_pub" >
         </div>
     </div>
-    <div class="bkd-whom open">
+    <div class="bkd-whom" [ngClass]="{'open': this.isSimple}">
         <div class="from">
             <label for="from" class="bk-lab">From</label>
             <input class="bk-in"
@@ -38,6 +38,11 @@
               class="bkd-desc"
               id="desc"
               rows="6"></textarea>
+    <mat-form-field class="bkd-select">
+      <mat-select formControlName="warehouse" placeholder="Warehouse">
+        <mat-option *ngFor="let house of warehouses" [value]="house.id">{{ house.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
     <tbody class="bk-lines" formArrayName="lines">
         <tr *ngFor="let lineCtrl of sheetForm.get('lines').controls; let i = index"
             [formGroupName]="i"

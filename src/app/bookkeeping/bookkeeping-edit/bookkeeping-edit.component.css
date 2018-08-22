@@ -11,7 +11,7 @@
 background: rgb(50,58,68); display:block; font-size:2em; color:white; float:right}
 .bkd-simple:after {content: "\53"; display:inline-block;}
 
-.bkd-whom {width:100%; background-color:rgb(50,58,68); height:0; transition: 1s ease; position:relative}
+.bkd-whom {width:100%; background-color:rgb(50,58,68); height:0; transition: 1s ease; position:relative; display:none;}
 .bkd-whom.open {height:auto; display:table;}
 .bkd-whom .from, .bkd-whom .to {width:50%; display:table-cell; border-radius:0; border:0; background:transparent;
 vertical-align: middle; text-align:left; color:white; padding:20px; float:left; color:rgba(255,255,255,.72); }
@@ -22,6 +22,11 @@ vertical-align: middle; text-align:left; color:white; padding:20px; float:left; 
 font-size:16px; color:white; top:calc(50% - 8px); left:calc(50% - 8px);}
 
 .bkd-desc {background:rgba(50,58,69,.04); display:block; width:100% !important; min-height: 40px; vertical-align: middle; padding:20px; border:0;}
+
+/*.bkd-select {background:rgba(50,58,69,.1); width:100%;border:0;padding:5px 5px 5px 10px;}*/
+/*.bkd-select option {padding:10px 10px 10px 20px;border:0;}*/
+/deep/.mat-form-field-appearance-legacy .mat-form-field-underline {}
+/deep/.mat-form-field-ripple {background-color: rgb(50,58,69) !important;}
 
 .bk-lines {width:100%; display:table; border-spacing: 0 1px}
 .bk-line-i {display:table-row; width:100%; background-color: rgba(0,0,0,.02); border-top:1px;}

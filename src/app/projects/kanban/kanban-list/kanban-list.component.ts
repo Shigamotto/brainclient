@@ -53,7 +53,7 @@ export class KanbanListComponent implements OnInit {
     } else {
       target.appendChild(document.getElementById(data));
     }
-    console.log(data, this.list.tag);
+    // console.log(data, this.list.tag);
     this.projectService.setStatus(data, this.list.tag);
   }
 

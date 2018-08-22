@@ -9,8 +9,6 @@ export class BookkeepingComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    console.log('Loading Bookkeeping...');
-  }
+  ngOnInit() {}
 
 }

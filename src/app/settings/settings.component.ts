@@ -11,12 +11,12 @@ import { Profile } from './settings.model';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
-  profile: Profile;
+  profile: Profile = Profile.EMPTY_MODEL;
   subscription: Subscription;
 
   constructor(
     private settingsService: SettingsService,
-    private http:HttpClient
+    private http: HttpClient
   ) {}
 
   ngOnInit() {}

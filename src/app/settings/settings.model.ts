@@ -6,8 +6,8 @@ export class Profile {
   image?: string;
   password?: string;
   active?: boolean;
-  organization?: {name?:string; id?:string; groups?}[];
-  chose_organization?:string;
+  organization?: {name?: string; id?:string; groups?}[];
+  chose_organization?: string;
   mailboxes?: {boxuser?; boxtype?; boxpass?; boxserv?; boxfetch?}[];
 
   constructor(
@@ -19,7 +19,7 @@ export class Profile {
     password?: string,
     active?: boolean,
     organization?: {}[],
-    chose_organization?:string,
+    chose_organization?: string,
     mailboxes?: {boxuser?; boxtype?; boxpass?; boxserv?; boxfetch?}[]
     ) {
     this.username = username;

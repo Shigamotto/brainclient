@@ -62,12 +62,11 @@ export class MessagesBrainDialogComponent implements OnInit {
         }
       );
 
+    // get messages
     this.wsSubsctiption = this.wsService.on<IMessage[]>(WS.ON.MESSAGE).subscribe((msg: any) => {
       console.log(msg);
       this.dialog.messages.push(new Message(msg.id, msg.date, msg.body, msg.from));
     });
-    // get messages
-    this.message$ = this.wsService.on<IMessage[]>(WS.ON.MESSAGE);
 
     // get counter
     this.counter$ = this.wsService.on<number>(WS.ON.COUNTER);

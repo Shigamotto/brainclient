@@ -11,10 +11,10 @@ import { SettingsService} from '../settings.service';
   styleUrls: ['./settings-profile.component.css']
 })
 export class SettingsProfileComponent implements OnInit {
-  public profile:Profile = Profile.EMPTY_MODEL;
+  public profile:  Profile = Profile.EMPTY_MODEL;
   profileForm: FormGroup;
   subscription: Subscription;
-  private avatarView: string = 'normal';
+  private avatarView = 'normal';
 
   constructor(
     private settingsService: SettingsService,
@@ -34,7 +34,7 @@ export class SettingsProfileComponent implements OnInit {
             'image': profile.image,
           });
           if (profile['organization']) {
-            for (let organization of profile.organization) {
+            for (const organization of profile.organization) {
               (<FormArray>this.profileForm.controls['organizations']).push(
                 new FormGroup({
                   'name': new FormControl(organization.name),
@@ -45,7 +45,7 @@ export class SettingsProfileComponent implements OnInit {
             }
           }
           if (profile['mailboxes']) {
-            for (let box of profile.mailboxes) {
+            for (const box of profile.mailboxes) {
               (<FormArray>this.profileForm.controls['mailboxes']).push(
                 new FormGroup({
                   'boxuser': new FormControl(box.boxuser),
@@ -60,13 +60,13 @@ export class SettingsProfileComponent implements OnInit {
         });
   }
 
-  private initForm(){
-    let profileUsername = this.profile.username;
-    let profileFirstName = this.profile.first_name;
-    let profileLastName = this.profile.last_name;
-    let profileImage = this.profile.image;
-    let profileOrganizations = new FormArray([]);
-    let profileMailboxes = new FormArray([]);
+  private initForm() {
+    const profileUsername = this.profile.username;
+    const profileFirstName = this.profile.first_name;
+    const profileLastName = this.profile.last_name;
+    const profileImage = this.profile.image;
+    const profileOrganizations = new FormArray([]);
+    const profileMailboxes = new FormArray([]);
 
     this.profileForm = new FormGroup({
       'username': new FormControl(profileUsername, Validators.required),
@@ -81,11 +81,11 @@ export class SettingsProfileComponent implements OnInit {
   private addNewMailbox() {
     (<FormArray>this.profileForm.controls['mailboxes']).push(
       new FormGroup({
-        'boxuser': new FormControl(""),
-        'boxpass': new FormControl(""),
-        'boxtype': new FormControl(""),
-        'boxserv': new FormControl(""),
-        'boxfetch': new FormControl("")
+        'boxuser': new FormControl(''),
+        'boxpass': new FormControl(''),
+        'boxtype': new FormControl(''),
+        'boxserv': new FormControl(''),
+        'boxfetch': new FormControl('')
       })
     );
   }
@@ -93,14 +93,14 @@ export class SettingsProfileComponent implements OnInit {
   private addNewOrganization() {
     (<FormArray>this.profileForm.controls['organizations']).push(
       new FormGroup({
-        'name': new FormControl(""),
-        'id': new FormControl(""),
-        'groups': new FormControl(""),
+        'name': new FormControl(''),
+        'id': new FormControl(''),
+        'groups': new FormControl(''),
       })
     );
   }
 
-  private changeAvatarView(viewMode:string) {
+  private changeAvatarView(viewMode: string) {
     this.avatarView = viewMode;
   }
 

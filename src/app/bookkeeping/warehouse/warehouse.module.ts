@@ -32,8 +32,7 @@ import { WarehouseRoutingModule } from './warehouse-routing.module';
     SharedModule
   ],
   providers: [
-    WarehouseService,
-    // LinkService,
+    // WarehouseService,
   ]
 })
 export class WarehouseModule {}

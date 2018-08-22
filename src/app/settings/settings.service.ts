@@ -8,13 +8,13 @@ import { Profile } from './settings.model';
 
 @Injectable()
 export class SettingsService {
-  profile: Profile;
-  profileChanged = new Subject<Profile>();
+  public profile: Profile;
+  public profileChanged = new Subject<Profile>();
   token: string;
 
   constructor(
     private router: Router,
-    private http:HttpClient
+    private http: HttpClient
   ) {}
 
   setProfile(profile: Profile) {
@@ -38,16 +38,16 @@ export class SettingsService {
       });
   };
 
-  editProfile(id:number, title:string, start: string, end:string) {
+  editProfile(id: number, title: string, start: string, end: string) {
     this.http.put('http://127.0.0.1:8000/api/task/' + id + '/edit/',
       {title: title, date_start: start, date_end: end} )
       .subscribe(
-        res => { console.log(res) },
-        err => { console.log(err) }
+        res => { console.log(res); },
+        err => { console.log(err); }
       );
   }
 
-  toggleLTDMode(){
+  toggleLTDMode() {
     // if(!this.profile){this.getProfile(){};
     this.profile.ltdmode = !this.profile.ltdmode;
     if (this.profile.ltdmode) {
@@ -57,7 +57,7 @@ export class SettingsService {
     this.setProfile(this.profile);
   }
 
-  choseLTDMode(id:string){
+  choseLTDMode(id: string) {
     this.profile.chose_organization = id;
     this.setProfile(this.profile);
   }

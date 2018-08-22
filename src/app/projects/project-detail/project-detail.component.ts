@@ -14,11 +14,11 @@ import { Task } from '../projects.model';
   styleUrls: ['./project-detail.component.css']
 })
 export class ProjectDetailComponent implements OnInit {
-  private id:number;
+  private id: number;
 
-  task:Task = Task.EMPTY_MODEL;
+  task: Task = Task.EMPTY_MODEL;
   subscription: Subscription;
-  whomIsOpen:boolean = false;
+  whomIsOpen = false;
 
   constructor(
     private headService: HeaderService,
@@ -27,7 +27,7 @@ export class ProjectDetailComponent implements OnInit {
   ) { }
 
   openWhom() {
-    console.log('need to open whom')
+    console.log('need to open whom');
     this.whomIsOpen = !this.whomIsOpen;
   }
 
@@ -38,8 +38,8 @@ export class ProjectDetailComponent implements OnInit {
           this.id = +params['id'];
           this.projectsService.getTask(this.id);
           this.subscription = this.projectsService.taskChose.pipe(
-            map((task:Task) => {
-              task["id"] = task["id"]? task["id"]: task["pk"];
+            map((task: Task) => {
+              task['id'] = task['id']? task["id"]: task["pk"];
               task["date"]["pub"] = moment(task["date"]["pub"]).format('YYYY MMM DD HH:mm');
               task["date"]["start"] = moment(task["date"]["start"]).format('YYYY MMM DD HH:mm');
               if (task["date"]["end"] > task["date"]["dead"]) {

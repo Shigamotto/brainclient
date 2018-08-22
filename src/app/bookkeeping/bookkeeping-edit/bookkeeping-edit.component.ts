@@ -6,6 +6,8 @@ import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { HeaderService } from '../../core/header/header.service';
 import { BookkeepingService } from '../bookkeeping.service';
 import { BookSheet } from '../bookkeeping.model';
+import {WarehouseService} from '../warehouse/warehouse.service';
+import {Warehouse} from '../warehouse/warehouse.model';
 
 @Component({
   selector: 'app-bookkeeping-edit',
@@ -13,18 +15,21 @@ import { BookSheet } from '../bookkeeping.model';
   styleUrls: ['./bookkeeping-edit.component.css']
 })
 export class BookkeepingEditComponent implements OnInit {
-  private id:number;
+  private id: number;
   editMode = false;
+  isSimple = true;
 
   sheetForm: FormGroup;
+  warehouses: Warehouse[];
 
   subscription: Subscription;
-  public bookSheet:BookSheet = BookSheet.EMPTY_MODEL;
+  public bookSheet: BookSheet = BookSheet.EMPTY_MODEL;
 
   constructor(
     private headService: HeaderService,
     private bkService: BookkeepingService,
     private route: ActivatedRoute,
+    private whService: WarehouseService,
     private router: Router
   ) { }
 
@@ -36,6 +41,10 @@ export class BookkeepingEditComponent implements OnInit {
           this.id = +params['id'];
           this.editMode = params['id'] != null;
           if (this.editMode) {
+            this.whService.getWarehouses();
+            this.whService.WHChanged.subscribe((warehouses: Warehouse[]) => {
+              this.warehouses = warehouses;
+            });
             this.bkService.getBookSheet(this.id);
             this.subscription = this.bkService.sheetChose.subscribe(
               (sheet: BookSheet) => {
@@ -46,9 +55,10 @@ export class BookkeepingEditComponent implements OnInit {
                   'desc': sheet.desc,
                   'date_pub': sheet.date_pub,
                   'amount': sheet.amount,
+                  'warehouse': sheet.warehouse,
                 });
                 if (sheet['lines']) {
-                  for (let line of sheet.lines) {
+                  for (const line of sheet.lines) {
                     (<FormArray>this.sheetForm.controls['lines']).push(
                       new FormGroup({
                         'name': new FormControl(line.name),
@@ -60,18 +70,22 @@ export class BookkeepingEditComponent implements OnInit {
                   }
                 }
               }
-            )
+            );
           }
         }
       );
   }
 
   ngOnDestroy() {
+    this.subscription.unsubscribe();
     this.headService.setStatus( undefined );
     this.headService.setWidget( undefined );
   }
 
   onSubmit() {
+    // console.log(this.sheetForm.value);
+    // console.log(this.bookSheet);
+    this.bkService.editBookSheet(this.id, this.sheetForm.value);
     if (this.editMode) {
       console.log('edit sheet');
       // this.bkService.updateSheet(this.id, this.sheetForm.value);
@@ -89,30 +103,29 @@ export class BookkeepingEditComponent implements OnInit {
   addNewLine() {
     (<FormArray>this.sheetForm.controls['lines']).push(
       new FormGroup({
-        'name': new FormControl(""),
-        'price': new FormControl(""),
-        'count': new FormControl(""),
-        'amount': new FormControl("")
+        'name': new FormControl(''),
+        'price': new FormControl(''),
+        'count': new FormControl(''),
+        'amount': new FormControl('')
       })
     );
   }
 
   private initForm() {
-    let sheetTitle = '';
-    let sheetSimple = true;
-    let sheetDesc = '';
-    let sheetLines = new FormArray([]);
-    let sheetDatePub = '';
-    let sheetAmount = 0;
-    let sheetCreatedBy = '';
-    let sheetStatusPay = 0;
-    let sheetStatusGet = 0;
-    let sheetStatusHistory = {};
-    let sheetFrom = {};
-    let sheetTo = {};
-    let sheetWarehouse = {};
+    const sheetTitle = '';
+    const sheetSimple = true;
+    const sheetDesc = '';
+    const sheetLines = new FormArray([]);
+    const sheetDatePub = '';
+    const sheetAmount = 0;
+    const sheetCreatedBy = '';
+    const sheetStatusPay = 0;
+    const sheetStatusGet = 0;
+    const sheetStatusHistory = {};
+    const sheetFrom = {};
+    const sheetTo = {};
+    const sheetWarehouse = 0;
 
-    console.log(sheetTitle);
     this.sheetForm = new FormGroup({
       'title': new FormControl(sheetTitle, Validators.required),
       // 'simple': new FormControl(sheetSimple, Validators.required),
@@ -126,8 +139,12 @@ export class BookkeepingEditComponent implements OnInit {
       // 'status_history': new FormControl(sheetStatusHistory, Validators.required),
       // 'from': new FormControl(sheetFrom, Validators.required),
       // 'to': new FormControl(sheetTo, Validators.required),
-      // 'warehouse': new FormControl(sheetWarehouse, Validators.required),
+      'warehouse': new FormControl(sheetWarehouse, Validators.required),
     });
+  }
+
+  sheetSimpleToggle() {
+    this.isSimple = !this.isSimple;
   }
 
 }

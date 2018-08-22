@@ -31,13 +31,16 @@ import { MessageBrainService } from '../messages/messages-brain/messages-brain.s
 // import { MatSlideToggleModule } from '@angular/material/slide-toggle'; #
 import { OAuthInterceptor } from '../shared/oauth.interceptor';
 import {WebsocketModule} from './websocket';
+import {NotificationsService} from './notifications/notifications.service';
+import {NotificationsComponent} from './notifications/notifications.component';
 
 @NgModule({
   declarations: [
     // FirstPageComponent,
     // HomeComponent,
     MenuComponent,
-    SearchComponent
+    SearchComponent,
+    NotificationsComponent
   ],
   imports: [
     // MDBBootstrapModule.forRoot(),
@@ -57,6 +60,7 @@ import {WebsocketModule} from './websocket';
     // MDBBootstrapModule,
     AppRoutingModule,
     MenuComponent,
+    NotificationsComponent,
     HeaderModule
   ],
   providers: [
@@ -66,6 +70,7 @@ import {WebsocketModule} from './websocket';
     ProjectsService,
     MailService,
     MessageBrainService,
+    NotificationsService,
     // WebsocketService,
     {provide: HTTP_INTERCEPTORS, useClass: OAuthInterceptor, multi: true}
     // {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}

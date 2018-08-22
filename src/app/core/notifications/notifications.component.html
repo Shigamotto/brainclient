@@ -1,2 +1,6 @@
-<app-messages-brain-dialog-list></app-messages-brain-dialog-list>
-<router-outlet></router-outlet>
+<div *ngFor="let note of notifications; let i = index"
+  class="notification" >
+  <span class="close" (click)="close(i)"></span>
+  {{ note.body }}
+  <a href="{{note.link}}">Посмотреть</a>
+</div>

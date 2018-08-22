@@ -22,12 +22,12 @@ export class BookkeepingListComponent implements OnInit {
       .subscribe(
         (sheets: BookSheet[]) => {
           this.sheets = sheets;
-        }
-      );
+        });
+    // this.bkService.clearBookSheet();
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    this.subscription.unsubscribe();
   }
 
 }
