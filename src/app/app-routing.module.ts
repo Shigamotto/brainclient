@@ -16,7 +16,8 @@ const appRoutes: Routes = [
   { path: 'projects', loadChildren: './projects/projects.module#ProjectsModule' },
   { path: 'bk', loadChildren: './bookkeeping/bookkeeping.module#BookkeepingModule'},
   { path: 'messages', loadChildren: './messages/messages.module#MessagesModule'},
-  { path: 'settings', loadChildren: './settings/settings.module#SettingsModule'}
+  { path: 'settings', loadChildren: './settings/settings.module#SettingsModule'},
+  { path: 'friends', loadChildren: './friends/friends.module#FriendsModule'}
 ];
 
 @NgModule({

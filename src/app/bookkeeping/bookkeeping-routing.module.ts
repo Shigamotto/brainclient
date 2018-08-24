@@ -10,13 +10,14 @@ import { BookkeepingListComponent } from './bookkeeping-list/bookkeeping-list.co
 
 const projectsRoutes: Routes = [
   { path: '', component: BookkeepingComponent, canActivate: [OAuthGuard], children: [
-    { path: '', redirectTo: 'list'},
-    { path: 'list', component: BookkeepingListComponent },
-    { path: 'wh', loadChildren: './warehouse/warehouse.module#WarehouseModule' },
-    { path: 'bom', loadChildren: './bom/bom.module#BOMModule' },
-    { path: 'new', component: BookkeepingEditComponent },
-    { path: ':id', component: BookkeepingDetailComponent },
-    { path: ':id/edit', component: BookkeepingEditComponent },
+      { path: '', redirectTo: 'list'},
+      { path: 'list', component: BookkeepingListComponent },
+      { path: 'new', component: BookkeepingEditComponent },
+      { path: 'wh', loadChildren: './warehouse/warehouse.module#WarehouseModule' },
+      { path: 'bom', loadChildren: './bom/bom.module#BOMModule' },
+      { path: 'item', loadChildren: './item/item.module#ItemModule' },
+      { path: ':id', component: BookkeepingDetailComponent },
+      { path: ':id/edit', component: BookkeepingEditComponent },
   ] },
 ];
 

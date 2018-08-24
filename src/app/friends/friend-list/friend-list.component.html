@@ -1,0 +1,7 @@
+<app-friend-item  *ngFor="let friend of friends; let i = index"
+                      [routerLink]="[friend.id]"
+                      [friend]="friend"
+                      [index]="i"
+                      class="lst-i">
+</app-friend-item>
+

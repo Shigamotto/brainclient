@@ -1,12 +1,15 @@
+import {Friend} from '../friends/friend.model';
+
 export class Profile {
   username: string;
   ltdmode: boolean;
   first_name: string;
   last_name: string;
+  friends: Friend[];
   image?: string;
   password?: string;
   active?: boolean;
-  organization?: {name?: string; id?:string; groups?}[];
+  organization?: {name?: string; id?: string; groups?}[];
   chose_organization?: string;
   mailboxes?: {boxuser?; boxtype?; boxpass?; boxserv?; boxfetch?}[];
 
@@ -15,6 +18,7 @@ export class Profile {
     ltdmode: boolean,
     first_name: string,
     last_name: string,
+    friends: Friend[],
     image?: string,
     password?: string,
     active?: boolean,
@@ -26,6 +30,7 @@ export class Profile {
     this.ltdmode = ltdmode;
     this.first_name = first_name;
     this.last_name = last_name;
+    this.friends = friends;
     this.image = image;
     this.password = password;
     this.active = active;
@@ -39,6 +44,7 @@ export class Profile {
     ltdmode: false,
     first_name: '',
     last_name: '',
+    friends: [],
     image: '',
     password: '',
     active: true,

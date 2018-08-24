@@ -4,16 +4,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { OAuthGuard } from '../../oauth/oauth-guard.service';
 
 import { ItemComponent } from './item.component';
-// import { BOMListComponent } from './bom-list/bom-list.component';
-// import { BOMDetailComponent } from './bom-detail/bom-detail.component';
-// import { BOMEditComponent } from './bom-edit/bom-edit.component';
+import { ItemListComponent } from './item-list/item-list.component';
+import { ItemDetailComponent } from './item-detail/item-detail.component';
+import { ItemEditComponent } from './item-edit/item-edit.component';
+import {Item} from './item.model';
 
 const ItemRoutes: Routes = [
   { path: '', component: ItemComponent, canActivate: [OAuthGuard], children: [
-    // { path: '', component: BOMListComponent },
-    // { path: 'new', component: BOMEditComponent },
-    // { path: ':id', component: BOMDetailComponent },
-    // { path: ':id/edit', component: BOMEditComponent },
+    { path: '', component: ItemListComponent },
+    { path: 'new', component: ItemEditComponent },
+    { path: ':id', component: ItemDetailComponent },
+    { path: ':id/edit', component: ItemEditComponent },
   ] },
 ];
 

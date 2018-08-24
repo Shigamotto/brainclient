@@ -28,7 +28,7 @@ export class SettingsService {
         (profile: Profile) => {
           this.setProfile(profile);
       });
-  };
+  }
 
   getProfileSettings() {
     this.http.get<Profile>('http://127.0.0.1:8000/api/u/set/?format=json')
@@ -36,7 +36,7 @@ export class SettingsService {
         (profile: Profile) => {
           this.setProfile(profile);
       });
-  };
+  }
 
   editProfile(id: number, title: string, start: string, end: string) {
     this.http.put('http://127.0.0.1:8000/api/task/' + id + '/edit/',

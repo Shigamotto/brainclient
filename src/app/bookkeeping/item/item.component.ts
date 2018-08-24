@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-item',
-  templateUrl: './bom.component.html',
-  styleUrls: ['./bom.component.css']
+  templateUrl: './item.component.html',
+  styleUrls: ['./item.component.css']
 })
 export class ItemComponent implements OnInit {
 

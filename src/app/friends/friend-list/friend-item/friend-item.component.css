@@ -1,0 +1,8 @@
+:host {padding:20px 30px; /*min-width:362px;*/ display:inline-block; cursor:pointer;}
+:host:hover {background: rgba(50,58,68,.05); }
+.friend-item {width:100%;text-align:center; display:inline-block; text-align:center;}
+.friend-item-avatar {width:150px;height:150px;border-radius:50%;background-color:rgba(50,58,68,.1);margin-bottom:10px;
+  display:flex;align-items:center;justify-content:center;text-align:center;color:white;font-size:6em;font-weight:900;}
+.friend-item-avatar img {min-height:150px; max-width:150px;}
+.friend-item-name {font-size:1.2em; font-weight:700; color:rgb(50,58,68); max-width:150px;}
+:host:hover .friend-item-name {text-decoration:underline;}

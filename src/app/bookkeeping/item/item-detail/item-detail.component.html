@@ -1,0 +1,43 @@
+<div class="bkd-header">
+    <div class="bkd-title">{{ item.name }}</div>
+    <div class="bkd-info">
+      <div class="item image">
+          <img src="{{ item.image }}">
+      </div>
+      <div class="bkd-simple" *ngIf="item.category" (click)="openWhom()">{{ item.category }}</div>
+      <div class="bkd-simple" *ngIf="item.category" (click)="openWhom()">{{ item.tax }}</div>
+      <div class="bkd-simple" *ngIf="item.category" (click)="openWhom()">{{ item.batch }}</div>
+      <div class="bkd-simple" *ngIf="item.category" (click)="openWhom()">{{ item.produce }}</div>
+      <div class="bkd-date">{{ item.cost }}</div>
+    </div>
+</div>
+<div class="bkd-whom" [ngClass]="{'open': whomIsOpen}">
+    <div class="from">{{ item.related }}</div>
+    <div class="to">{{ item.classifier }}</div>
+</div>
+<div class="bkd-desc" [innerHTML]="item.desc"></div>
+<tbody class="bk-lines">
+    <tr *ngFor="let attr of item.attribute" class="bk-line-i" >
+        <td class="bk-line-name">{{ attr[0] }}</td>
+        <td class="bk-line-price">{{ attr[1]}}</td>
+    </tr>
+</tbody>
+<tbody class="bk-lines">
+  <tr *ngFor="let test of item.testing" class="bk-line-i" >
+    <td class="bk-line-name">{{ test[0] }}</td>
+    <td class="bk-line-price">{{ test[1]}}</td>
+  </tr>
+</tbody>
+<tbody class="bk-lines">
+<tr *ngFor="let cons of item.consumer" class="bk-line-i" >
+  <td class="bk-line-name">{{ cons[0] }}</td>
+  <td class="bk-line-price">{{ cons[1]}}</td>
+</tr>
+</tbody>
+<tbody class="bk-lines">
+<tr *ngFor="let his of item.history" class="bk-line-i" >
+  <td class="bk-line-name">{{ his[0] }}</td>
+  <td class="bk-line-price">{{ his[1]}}</td>
+</tr>
+</tbody>
+

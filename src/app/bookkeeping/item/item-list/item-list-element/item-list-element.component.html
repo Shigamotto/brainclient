@@ -1,0 +1,19 @@
+<tr (click)="onClick()" class="bk-lst-i-a">
+  <td class="bk-lst-title">{{ item.name }}</td>
+  <td class="bk-lst-title">{{ item.category }}</td>
+  <td class="bk-lst-title">{{ item.produce }}</td>
+  <td class="bk-lst-title">
+    <span *ngIf="item.consumer">{{ item.consumer[0].name }}</span>
+  </td>
+  <td class="bk-lst-amount">{{ item.cost }}</td>
+</tr>
+<tbody *ngIf="clicked" class="bk-lines">
+<tr><td>{{item.desc}}</td></tr>
+<tr *ngFor="let line of item.attribute; let iLine = index" class="bk-line-i" >
+  <td class="close" rowspan="0" *ngIf="iLine == 0" (click)="onClose()"></td>
+  <td class="bk-line-name">{{ line.name}}</td>
+  <td class="bk-line-price">{{ line.price}}</td>
+  <td class="bk-line-count">{{ line.count }}</td>
+  <td class="bk-line-amount">{{ line.amount }}</td>
+</tr>
+</tbody>

@@ -1,0 +1,7 @@
+<div (click)="onClick()" class="friend-item" >
+    <div class="friend-item-avatar">
+      <img src="{{ friend.avatar }}" *ngIf="friend.avatar">
+      <span *ngIf="!friend.avatar">?</span>
+    </div>
+    <div class="friend-item-name">{{ friend.name }}</div>
+</div>

@@ -12,10 +12,10 @@ import { BookSheet } from '../bookkeeping.model';
   styleUrls: ['./bookkeeping-detail.component.css']
 })
 export class BookkeepingDetailComponent implements OnInit {
-  private id:number;
-  private whomIsOpen:boolean = true;
+  private id: number;
+  private whomIsOpen = true;
 
-  bookSheet:BookSheet = BookSheet.EMPTY_MODEL;
+  bookSheet: BookSheet = BookSheet.EMPTY_MODEL;
   subscription: Subscription;
 
   constructor(
@@ -31,7 +31,7 @@ export class BookkeepingDetailComponent implements OnInit {
           this.id = +params['id'];
           this.bkService.getBookSheet(this.id);
           this.subscription = this.bkService.sheetChose.subscribe(
-            (sheet:BookSheet) => {
+            (sheet: BookSheet) => {
               this.bookSheet = sheet;
               this.headService.setStatus( 'get paid ' + sheet.status_get.toString() + sheet.status_pay.toString());
               this.headService.setWidget( sheet.amount.toString() );
@@ -39,8 +39,7 @@ export class BookkeepingDetailComponent implements OnInit {
                 this.whomIsOpen = false;
               }
             }
-          )
-        }
+          )}
       );
   }
 

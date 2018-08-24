@@ -23,6 +23,7 @@ import { OAuthService } from '../oauth/oauth.service';
 import { ProjectsService } from '../projects/projects.service';
 import { MailService } from '../messages/mail/mail.service';
 import { MessageBrainService } from '../messages/messages-brain/messages-brain.service';
+import { FriendsService } from '../friends/friends.service';
 // import { MessagesBrainWSService } from '../messages/messages-brain/messages-brain.ws.services';
 // import { WebsocketService } from './websocket.service';
 
@@ -71,6 +72,7 @@ import {NotificationsComponent} from './notifications/notifications.component';
     MailService,
     MessageBrainService,
     NotificationsService,
+    FriendsService,
     // WebsocketService,
     {provide: HTTP_INTERCEPTORS, useClass: OAuthInterceptor, multi: true}
     // {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}
