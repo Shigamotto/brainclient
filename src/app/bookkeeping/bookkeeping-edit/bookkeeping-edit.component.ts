@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { HeaderService } from '../../core/header/header.service';
@@ -8,6 +8,9 @@ import { BookkeepingService } from '../bookkeeping.service';
 import { BookSheet } from '../bookkeeping.model';
 import {WarehouseService} from '../warehouse/warehouse.service';
 import {Warehouse} from '../warehouse/warehouse.model';
+import {Organization} from '../../organization/organization.model';
+import {map, startWith} from 'rxjs/operators';
+import {Category} from '../category/category.model';
 
 @Component({
   selector: 'app-bookkeeping-edit',
@@ -21,6 +24,7 @@ export class BookkeepingEditComponent implements OnInit {
 
   sheetForm: FormGroup;
   warehouses: Warehouse[];
+  filteredWarehouse: Observable<Warehouse[]>;
 
   subscription: Subscription;
   public bookSheet: BookSheet = BookSheet.EMPTY_MODEL;
@@ -44,6 +48,12 @@ export class BookkeepingEditComponent implements OnInit {
             this.whService.getWarehouses();
             this.whService.WHChanged.subscribe((warehouses: Warehouse[]) => {
               this.warehouses = warehouses;
+              this.filteredWarehouse = this.sheetForm.get('warehouse').valueChanges
+                .pipe(
+                  startWith<string | Warehouse >(''),
+                  map(value => typeof value === 'string' ? value : value.name),
+                  map(name => name ? this._filterWarehouses(name) : this.warehouses.slice())
+                );
             });
             this.bkService.getBookSheet(this.id);
             this.subscription = this.bkService.sheetChose.subscribe(
@@ -145,6 +155,16 @@ export class BookkeepingEditComponent implements OnInit {
 
   sheetSimpleToggle() {
     this.isSimple = !this.isSimple;
+  }
+
+  private _filterWarehouses(value: string): Warehouse[] {
+    const filterValue = value.toLowerCase();
+
+    return this.warehouses.filter(option => option.name.toLowerCase().includes(filterValue));
+  }
+
+  displayWarehouseFn(data?: Warehouse): string | undefined {
+    return data ? data.name : undefined;
   }
 
 }

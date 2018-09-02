@@ -1,14 +1,23 @@
-.bk-lst-i-a {display:table; margin-top:1px; padding:5px 0; color:black; width:100%; background-color: rgba(0,0,0,.05);}
-.bk-lst-i-a:hover {background-color: rgba(0,0,0,.1);}
-.bk-lst-date, .close {display:table-cell; width: 80px; vertical-align: middle; text-align: center; font-size:.8em; color:rgba(50,58,69,.7);}
+.close {display:table-cell; width: 80px; vertical-align: middle; text-align: center; font-size:.8em; color:rgba(50,58,69,.7);
+  background-color: rgba(0,0,0,0) !important;}
 .close:before {content: "\57"; display:inline; font-family: dripicons;}
-.close:hover {background-color: rgba(0,0,0,.05);}
-.bk-lst-title, .bk-line-name {display:table-cell; width: calc(100% - 80px - 80px - 80px - 100px); padding-left:5px;}
-.bk-lst-desc {display:none;}
-.bk-lst-status-get, .bk-lst-status-pay, .bk-line-count, .bk-line-price {display:table-cell; width: 80px;}
-.bk-lst-amount, .bk-line-amount {display:table-cell; width: 100px;}
-.bk-lst-amount.expense {color: #e21900}
-.bk-lst-amount.expense:before {content:'-'; display:inline;}
-.bk-lst-amount.income {color:green;}
-.bk-line-i {display:table-row; width:100%; background-color: rgba(0,0,0,.02);margin-top:1px; }
-.bk-lines {width:100%; display:table; margin-top:1px;}
+.close:hover {background-color: rgba(0,0,0,.05) !important;}
+
+:host {display:table-row; width:100%; cursor:pointer;}
+.item-line-i {display:table-row; width:100%; background-color: rgba(0,0,0,.02);margin-top:1px; cursor:pointer;}
+.item-lines {width:100%; display:table; margin-top:1px;background-color: rgba(0,0,0,.02);margin-top:1px; }
+
+.item-lst-i-a {display:table; margin-top:1px; color:black; width:100%; background-color: rgba(0,0,0,.05);}
+.item-lst-i-a:hover {background-color: rgba(0,0,0,.1);}
+
+.item-lst-i-a td, .item-lines td {padding:3px 5px; background-color: rgba(0,0,0,.02);}
+.item-lst-i-a td:nth-child(n+1),
+.item-lines td:nth-child(n+1) {border-left:1px solid white;}
+.item-line-i:hover td {background-color:rgba(0,0,0,.06)}
+.item-name {width:50%;}
+.item-cat {}
+.item-produce {}
+.item-cost, .item-prop-value {display:table-cell; width: 100px;}
+.item-lines .item-desc {padding:6px 10px;}
+.item-prop-name {padding:3px 5px;}
+.item-prop-value {padding:3px 5px;}

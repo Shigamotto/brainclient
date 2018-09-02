@@ -1,7 +1,7 @@
 <div class="bk-menu">
     <a class="bk-button refresh"></a>
     <a class="bk-button create" routerLink="new">New</a>
-    <a class="bk-button reply" [routerLink]="[1, 'edit']">Edit</a>
+    <a class="bk-button reply" [routerLink]="[id, 'edit']" *ngIf="id">Edit</a>
     <a class="bk-button delete" >Delete</a>
     <a class="bk-button mark" (click)="onEdit()">Mark</a>
     <a class="bk-button lock">Lock</a>

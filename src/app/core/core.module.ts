@@ -34,6 +34,8 @@ import { OAuthInterceptor } from '../shared/oauth.interceptor';
 import {WebsocketModule} from './websocket';
 import {NotificationsService} from './notifications/notifications.service';
 import {NotificationsComponent} from './notifications/notifications.component';
+import {OrganizationService} from '../organization/organization.service';
+import {CategoryService} from '../bookkeeping/category/category.service';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,8 @@ import {NotificationsComponent} from './notifications/notifications.component';
     MessageBrainService,
     NotificationsService,
     FriendsService,
+    CategoryService,
+    OrganizationService,
     // WebsocketService,
     {provide: HTTP_INTERCEPTORS, useClass: OAuthInterceptor, multi: true}
     // {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatFormFieldModule, MatSelectModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { Safe } from './html.pipe';
 import { AutosizeDirective } from './autosize.directive';
@@ -15,7 +16,10 @@ import { AccordionModule } from './accordion';
   imports: [
     // DropdownModule,
     // AccordionModule
-    MatFormFieldModule, MatSelectModule
+    MatInputModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   declarations: [
     AutosizeDirective,
@@ -23,7 +27,10 @@ import { AccordionModule } from './accordion';
   ],
   exports: [
     CommonModule,
-    MatFormFieldModule, MatSelectModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatSelectModule,
     AccordionModule,
     // DropdownModule,
     AutosizeDirective,

@@ -1,43 +1,113 @@
-<div class="bkd-header">
-    <div class="bkd-title">{{ item.name }}</div>
-    <div class="bkd-info">
-      <div class="item image">
-          <img src="{{ item.image }}">
+<!-- Блок всплывающего изображения -->
+<div #images class="item-images" [ngClass]="{'open': picIsOpen}">
+  <span class="close" (click)="openPicture()"></span>
+  <div *ngIf="item.images.length > 1">
+    <ul class="item-image-list">
+      <li *ngFor="let image of item.images; let i = index"
+          (click)="openImage(i)"
+          [ngClass]="{'to_send': image.to_send, 'is_top': image.is_top}">
+        <span class="status"></span>{{ image.name }}
+      </li>
+    </ul>
+    <div class="item-image"
+         *ngFor="let image of item.images; let i = index"
+         [ngClass]="{'open': i == 0}">
+      <img src="{{ image.image }}">
+      <span class="item-image-desc">{{ image.desc }}</span>
+    </div>
+  </div>
+  <div *ngIf="item.images.length == 1">
+    <div class="item-image single" >
+      <img *ngIf="item.images[0].image" src="{{ item.images[0].image }}">
+      <span *ngIf="item.images[0].desc" class="item-image-desc">{{ item.images[0].desc }}</span>
+    </div>
+  </div>
+  <div *ngIf="item.images.length == 0">
+    <div class="item-image" >
+      <span class="item-image-blank">Not any image</span>
+    </div>
+  </div>
+</div>
+
+<!-- Связанные элемент -->
+<div class="item-related" *ngIf="item.related">
+  <a *ngFor="let rel of item.related" >{{ rel }}</a>
+</div>
+<div class="item-header">
+  <div class="item-title">
+    <span (click)="openClassifier()">{{ item.name }}</span>
+    <div class="item-title-hover"  [ngClass]="{'open': classifierIsOpen}">
+      <div class="item-category"   *ngIf="item.category"   >{{ item.category.name }}</div>
+      <div class="item-produce"    *ngIf="item.produce"    >{{ item.produce.name }}</div>
+      <div class="item-classifier" *ngIf="item.classifier">
+        <div class="item-classifier-i" *ngFor="let class of item.classifier">
+          <span>{{ class.name }}</span>
+          <span>{{ class.value }}</span>
+        </div>
       </div>
-      <div class="bkd-simple" *ngIf="item.category" (click)="openWhom()">{{ item.category }}</div>
-      <div class="bkd-simple" *ngIf="item.category" (click)="openWhom()">{{ item.tax }}</div>
-      <div class="bkd-simple" *ngIf="item.category" (click)="openWhom()">{{ item.batch }}</div>
-      <div class="bkd-simple" *ngIf="item.category" (click)="openWhom()">{{ item.produce }}</div>
-      <div class="bkd-date">{{ item.cost }}</div>
+    </div>
+  </div>
+  <div class="item-info">
+
+      <div class="item-cost" (click)="openPrices()">
+        {{ item.cost }}
+        <span *ngIf="item.tax">{{ item.tax }}%</span>
+      </div>
+      <div class="item-batch" *ngIf="item.batch" >{{ item.batch }}</div>
+      <div class="item-open-image" (click)="openPicture()"></div>
+
+    <tbody class="item-prices" *ngIf="item.price" [ngClass]="{'open':pricesIsOpen}">
+      <tr *ngFor="let price of item.price" class="item-line-i" [ngClass]="{'organization': price.type == 'organization'}">
+        <td>{{ price.name }}</td>
+        <td class="item-line-count">{{ price.value }}</td>
+        <td class="item-line-count">{{ price.price }}</td>
+        <td class="lines-date">{{ price.update }}</td>
+      </tr>
+    </tbody>
+  </div>
+</div>
+
+<!-- Атрибуты и параметры тестирования -->
+<div class="item-attr" >
+    <div class="item-attr-attribute" *ngIf="item.attribute">
+      <div class="item-attr-i item-list-i" *ngFor="let attr of item.attribute">
+        <span class="item-list-f">{{ attr.name }}</span>
+        <span class="item-list-l">{{ attr.value }}</span>
+      </div>
+    </div>
+    <div class="item-attr-testing" *ngIf="item.testing">
+      <div class="item-attr-i item-list-i" *ngFor="let test of item.testing">
+        <span class="item-list-f">{{ test.name }}</span>
+        <span class="item-list-l">{{ test.value }}</span>
+      </div>
     </div>
 </div>
-<div class="bkd-whom" [ngClass]="{'open': whomIsOpen}">
-    <div class="from">{{ item.related }}</div>
-    <div class="to">{{ item.classifier }}</div>
-</div>
-<div class="bkd-desc" [innerHTML]="item.desc"></div>
-<tbody class="bk-lines">
-    <tr *ngFor="let attr of item.attribute" class="bk-line-i" >
-        <td class="bk-line-name">{{ attr[0] }}</td>
-        <td class="bk-line-price">{{ attr[1]}}</td>
-    </tr>
-</tbody>
-<tbody class="bk-lines">
-  <tr *ngFor="let test of item.testing" class="bk-line-i" >
-    <td class="bk-line-name">{{ test[0] }}</td>
-    <td class="bk-line-price">{{ test[1]}}</td>
+
+<!-- Описани -->
+<div class="item-desc" [innerHTML]="item.desc"></div>
+
+<!-- Потребители -->
+<tbody class="item-lines" *ngIf="item.consumer">
+  <tr><th colspan="3" class="item-heading">Потребители</th></tr>
+  <tr *ngFor="let cons of item.consumer" class="item-line-i" [ngClass]="{'organization': cons.type == 'organization'}">
+    <td [ngClass]="{'repeatable': cons.repeat}">{{ cons.name }}</td>
+    <td class="item-line-count">{{ cons.value }}</td>
+    <td class="lines-date">{{ cons.date }}</td>
   </tr>
 </tbody>
-<tbody class="bk-lines">
-<tr *ngFor="let cons of item.consumer" class="bk-line-i" >
-  <td class="bk-line-name">{{ cons[0] }}</td>
-  <td class="bk-line-price">{{ cons[1]}}</td>
-</tr>
-</tbody>
-<tbody class="bk-lines">
-<tr *ngFor="let his of item.history" class="bk-line-i" >
-  <td class="bk-line-name">{{ his[0] }}</td>
-  <td class="bk-line-price">{{ his[1]}}</td>
-</tr>
+
+<!-- История совершенных операций по товару -->
+<tbody class="item-lines" *ngIf="item.history">
+  <tr><th colspan="4" class="item-heading">Совершенные операции</th></tr>
+  <tr *ngFor="let his of item.history" class="item-line-i" >
+    <td>{{ his.source }}</td>
+    <td class="item-line-count">
+      {{ his.count }}
+      <span class="tax" *ngIf="his.tax > 0">({{his.tax}})</span>
+      <small *ngIf="his.discount > 0">{{ his.discount }}</small>
+    </td>
+    <td class="item-line-count">{{ his.value }}</td>
+    <td class="lines-date">{{ his.date }}</td>
+  </tr>
 </tbody>
 

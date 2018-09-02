@@ -3,7 +3,7 @@
     <div class="bkd-info">
         <div class="bkd-draft"
              [ngClass]="{'confirmed': !bom.draft}"
-             (click)="conformBOM()"></div>
+             (click)="confirmBOM()"></div>
         <div class="mode" [ngClass]="{'extra':extraMode}" (click)="bomChangeMode()"></div>
         <div class="bkd-date">{{ bom.date_pub }}</div>
     </div>

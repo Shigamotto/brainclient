@@ -12,10 +12,10 @@ import { BOM } from '../bom.model';
   styleUrls: ['./bom-detail.component.css']
 })
 export class BOMDetailComponent implements OnInit {
-  private id:number;
-  private extraMode: boolean = false;
+  private id: number;
+  private extraMode = false;
 
-  bom:BOM = BOM.EMPTY_MODEL;
+  bom: BOM = BOM.EMPTY_MODEL;
   subscription: Subscription;
 
   constructor(
@@ -31,10 +31,21 @@ export class BOMDetailComponent implements OnInit {
           this.id = +params['id'];
           this.bomService.getBOM(this.id);
           this.subscription = this.bomService.BOMChose.subscribe(
-            (data:BOM) => {
-              this.bom = data;
+            (data: BOM) => {
+              this.bom = new BOM(
+                data.name,
+                data.id,
+                data.date_pub,
+                data.desc,
+                data.parent,
+                data.draft,
+                data.org,
+                data.bill,
+                data.bill_extra,
+                data.path,
+              );
             }
-          )
+          );
         }
       );
   }

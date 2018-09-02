@@ -1,70 +1,170 @@
-<form [formGroup]="sheetForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+
+<div class="item-images" [ngClass]="{'open': picIsOpen}">
+  <span class="close" (click)="openPictures()"></span>
+  <div formArrayName="images">
+    <ul class="item-image-list">
+      <li *ngFor="let image of item.images; let i = index"
+          (click)="openImage(i)"
+          [ngClass]="{'to_send': image.to_send, 'is_top': image.is_top}">
+        <span class="status"></span>{{ image.name }}
+        <span class="close" (click)="deleteImage(image.id, i, $event)"></span>
+      </li>
+      <input class="hidden-button" type="file" #newFileInput (change)="addNewImageLine($event)" multiple>
+      <button type="button" class="btn add-line" (click)="newFileInput.click()">T</button>
+    </ul>
+    <div class="item-image"
+         *ngFor="let lineCtrl of itemForm.get('images').controls; let i = index"
+         [formGroupName]="i"
+         [ngClass]="{'open': i == 0}">
+      <input type="hidden" formControlName="id" >
+      <img *ngIf="item.images[i]" [src]="item.images[i].image" >
+      <input type="file" #fileInput (change)="handleFileInput($event, item.images[i].id)">
+      <input type="text" formControlName="name" class="item-image-name">
+      <label class="item-image-top">
+        <!--Главная фотография-->
+        <input type="checkbox" formControlName="is_top" class="checkbox">
+        <span class="checkbox-custom"></span>
+      </label>
+      <label class="item-image-send">
+        <!--Для отправки в сообщениях-->
+        <input type="checkbox" formControlName="to_send" class="checkbox" >
+        <span class="checkbox-custom"></span>
+      </label>
+      <textarea autosize formControlName="desc"
+                class="bkd-desc"
+                rows="6"></textarea>
+    </div>
+  </div>
+</div>
     <div class="bkd-header">
-        <input formControlName="title"
+        <input formControlName="name"
+               id="name"
                class="bkd-title"
                type="text"
-               id="title"
-               placeholder="Title" >
+               placeholder="Name" >
         <div class="bkd-info">
-            <input class="bkd-amount"
+          <input formControlName="tax"
+                 id="tax"
+                 class="item-tax"
+                 type="text"
+                 placeholder="0" >
+          <input formControlName="cost"
+                   id="cost"
+                   class="item-cost"
                    type="text"
-                   id="amount"
-                   formControlName="amount"
                    placeholder="0" >
-            <div class="bkd-simple" (click)="sheetSimpleToggle()"></div>
-            <input class="bkd-date"
+          <div class="item-batch"><input formControlName="batch"
+                   id="batch"
+                   class="item-batch-input"
                    type="text"
-                   id="date_pub"
-                   formControlName="date_pub" >
+                   placeholder="0" ></div>
+          <div class="item-open-image" (click)="openPictures()"></div>
         </div>
     </div>
-    <div class="bkd-whom" [ngClass]="{'open': this.isSimple}">
-        <div class="from">
-            <label for="from" class="bk-lab">From</label>
-            <input class="bk-in"
-                   type="text"
-                   id="from"
-                   placeholder="..." >
+
+
+
+    <!-- Атрибуты и параметры тестирования -->
+    <div class="item-attr" >
+      <div class="item-attr-attribute" formArrayName="attribute">
+        <div class="item-attr-i item-list-i"
+             *ngFor="let lineCtrl of itemForm.get('attribute').controls; let i = index"
+             [formGroupName]="i">
+          <span class="item-list-f">
+            <input formControlName="name" type="text" class="item-in" placeholder="name">
+          </span>
+          <span class="item-list-l">
+            <input formControlName="value" type="text" class="item-in" placeholder="value">
+          </span>
         </div>
-        <div class="to">
-            <label for="to" class="bk-lab">To</label>
-            <input class="bk-in"
-                   type="text"
-                   id="to"
-                   placeholder="..." >
+        <button type="button" class="btn add-line" (click)="addNewAttributeLine()">T</button>
+      </div>
+      <div class="item-attr-testing" formArrayName="testing">
+        <div class="item-attr-i item-list-i"
+             *ngFor="let lineCtrl of itemForm.get('testing').controls; let i = index"
+             [formGroupName]="i">
+          <span class="item-list-f">
+            <input formControlName="name" type="text" class="item-in" placeholder="name">
+          </span>
+          <span class="item-list-l">
+            <input formControlName="value" type="text" class="item-in" placeholder="value">
+          </span>
         </div>
+        <button type="button" class="btn add-line" (click)="addNewTestingLine()">T</button>
+      </div>
     </div>
+
+    <!-- Категории, производитель и классификаторы -->
+    <div class="item-title-hover"  [ngClass]="{'open': classifierIsOpen}">
+      <mat-form-field class="item-category">
+        <input type="text"
+               placeholder="Category"
+               aria-label="Number"
+               matInput
+               formControlName="category"
+               [matAutocomplete]="autoCategory">
+        <mat-autocomplete #autoCategory="matAutocomplete" [displayWith]="displayCategoryFn">
+          <mat-option *ngFor="let cat of filteredCategories | async" [value]="cat">{{ cat.name }}</mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field class="item-produce">
+        <input type="text"
+               placeholder="Produce"
+               aria-label="Number"
+               matInput
+               formControlName="produce"
+               [matAutocomplete]="autoProduce">
+        <mat-autocomplete #autoProduce="matAutocomplete" [displayWith]="displayOrganizationFn">
+          <mat-option *ngFor="let pro of filteredProduce | async" [value]="pro">{{ pro.name }}</mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div class="item-classifier" formArrayName="classifier">
+        <div class="item-classifier-i"
+             *ngFor="let lineCtrl of itemForm.get('classifier').controls; let i = index"
+             [formGroupName]="i">
+          <input formControlName="name" type="text" class="item-class-in" placeholder="name">
+          <input formControlName="value" type="text" class="item-class-in" placeholder="value">
+        </div>
+        <button type="button" class="btn add-line" (click)="addNewClassifierLine()">T</button>
+      </div>
+    </div>
+    <!-- Описание -->
     <textarea autosize formControlName="desc"
               class="bkd-desc"
               id="desc"
               rows="6"></textarea>
-    <mat-form-field class="bkd-select">
-      <mat-select formControlName="warehouse" placeholder="Warehouse">
-        <mat-option *ngFor="let house of warehouses" [value]="house.id">{{ house.name }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <tbody class="bk-lines" formArrayName="lines">
-        <tr *ngFor="let lineCtrl of sheetForm.get('lines').controls; let i = index"
-            [formGroupName]="i"
-            class="bk-line-i">
-            <td class="bk-line-name">
-                <input formControlName="name" type="text" class="bk-in" placeholder="name">
-            </td>
-            <td class="bk-line-price">
-                <input formControlName="price" type="text" class="bk-in" placeholder="price">
-            </td>
-            <td class="bk-line-count">
-                <input formControlName="count" type="text" class="bk-in" placeholder="count">
-            </td>
-            <td class="bk-line-amount">
-                <input formControlName="amount" type="text" class="bk-in" placeholder="amount">
-            </td>
-        </tr>
+
+    <!-- Потребители -->
+    <tbody class="item-lines" *ngIf="item.consumer">
+    <tr><th colspan="3" class="item-heading">Потребители</th></tr>
+    <tr *ngFor="let cons of item.consumer" class="item-line-i" [ngClass]="{'organization': cons.type == 'organization'}">
+      <td [ngClass]="{'repeatable': cons.repeat}">{{ cons.name }}</td>
+      <td class="item-line-count">{{ cons.value }}</td>
+      <td class="lines-date">{{ cons.date }}</td>
+    </tr>
     </tbody>
-    <button type="button" class="btn add-line" (click)="addNewLine()">T</button>
+
+    <!-- История совершенных операций по товару -->
+    <tbody class="item-lines" *ngIf="item.history">
+    <tr><th colspan="4" class="item-heading">Совершенные операции</th></tr>
+    <tr *ngFor="let his of item.history" class="item-line-i" >
+      <td>{{ his.source }}</td>
+      <td class="item-line-count">
+        {{ his.count }}
+        <span class="tax" *ngIf="his.tax > 0">({{his.tax}})</span>
+        <small *ngIf="his.discount > 0">{{ his.discount }}</small>
+      </td>
+      <td class="item-line-count">{{ his.value }}</td>
+      <td class="lines-date">{{ his.date }}</td>
+    </tr>
+    </tbody>
+
     <div class="bk-btn">
-        <button type="submit" [disabled]="!sheetForm.valid"
+        <button type="submit" [disabled]="!itemForm.valid"
                 class="btn btn-success">Save</button>
         <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
     </div>
+
+
 </form>

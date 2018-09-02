@@ -39,10 +39,17 @@
               id="desc"
               rows="6"></textarea>
     <mat-form-field class="bkd-select">
-      <mat-select formControlName="warehouse" placeholder="Warehouse">
-        <mat-option *ngFor="let house of warehouses" [value]="house.id">{{ house.name }}</mat-option>
-      </mat-select>
+      <input type="text"
+             placeholder="Warehouse"
+             aria-label="Number"
+             matInput
+             formControlName="warehouse"
+             [matAutocomplete]="autoCategory">
+      <mat-autocomplete #autoCategory="matAutocomplete" [displayWith]="displayWarehouseFn">
+        <mat-option *ngFor="let house of filteredWarehouse | async" [value]="house">{{ house.name }}</mat-option>
+      </mat-autocomplete>
     </mat-form-field>
+
     <tbody class="bk-lines" formArrayName="lines">
         <tr *ngFor="let lineCtrl of sheetForm.get('lines').controls; let i = index"
             [formGroupName]="i"

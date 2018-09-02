@@ -1,3 +1,5 @@
+import {Warehouse} from './warehouse/warehouse.model';
+
 export class BookSheet {
   id: number; title: string; simple: boolean;
   desc: string;
@@ -10,7 +12,7 @@ export class BookSheet {
   status_history?: { date?; status?; }[];
   from?: { organization?: any; user?: any;  };
   to?: { organization?: any; user?: any; };
-  warehouse?: string;
+  warehouse?: Warehouse;
   refers?: {}[];
   attach?: {}[];
 
@@ -28,7 +30,7 @@ export class BookSheet {
     status_history?: [{ date; status; }],
     from?: { organization?: any; user?: any; },
     to?: { organization?: any; user?: any; },
-    warehouse?: string,
+    warehouse?: Warehouse,
     refers?: [{}],
     attach?: [{}],
   ) {
@@ -64,7 +66,7 @@ export class BookSheet {
     status_history: [],
     from: {},
     to: { },
-    warehouse: '',
+    warehouse: Warehouse.EMPTY_MODEL,
     refers: [],
     attach: [],
   };

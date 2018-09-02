@@ -18,6 +18,27 @@ export class ItemService {
               private http: HttpClient,
               private authService: OAuthService) {}
 
+  postImage(item_id: number, data: any, image_id?: number) {
+    if (image_id) {
+      return this.http.patch<Item>('http://127.0.0.1:8000/api/items/' + item_id + '/images/' + image_id + '/?format=json', data );
+    } else {
+      return this.http.post<Item>('http://127.0.0.1:8000/api/items/' + item_id + '/images/create/?format=json', data );
+    }
+  }
+
+  removeItemImage(image_id: number) {
+    console.log('catch Service Image deleting');
+    return this.http.delete<Item>('http://127.0.0.1:8000/api/items/' + this.item.id + '/images/' + image_id + '/?format=json' )
+      .subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
   setItems(data: Item[]) {
     this.items = data;
     this.ItemsChanged.next(this.items.slice());
@@ -43,6 +64,12 @@ export class ItemService {
           this.choseItem(data);
       });
     return this.ItemChose.asObservable();
+  }
+
+  editItem(id: number, item: Item | any) {
+    console.log(item);
+    return this.http.patch<Item>('http://127.0.0.1:8000/api/items/' + id + '/?format=json',
+      item );
   }
 
 }
