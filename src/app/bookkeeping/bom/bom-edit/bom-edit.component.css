@@ -26,6 +26,9 @@ font-size:16px; color:white; top:calc(50% - 8px); left:calc(50% - 8px);}
 .bk-lines {width:100%; display:table; border-spacing: 0 1px}
 .bk-line-i {display:table-row; width:100%; background-color: rgba(0,0,0,.02); border-top:1px;}
 .bk-line-i:hover {background-color: rgba(0,0,0,.04);}
+.bk-line-i td {padding: 6px 4px;}
+.bk-line-i .bk-line-name { padding-left:20px;}
+.bk-line-i .bk-line-price, .bk-line-i .bk-line-count {width:120px;}
 
 .bk-in {border:0; border-radius:0; background:transparent; display:block; width:100%; padding:0; margin:0;}
 
@@ -33,3 +36,5 @@ font-size:16px; color:white; top:calc(50% - 8px); left:calc(50% - 8px);}
 
 .bk-btn {display:table; width:100%;margin-top:1px; }
 .bk-btn .btn {display:table-cell; width:50%; float:right;}
+
+.bom-parent, .bom-org {width:50%; padding:10px 20px 0;}

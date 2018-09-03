@@ -36,6 +36,7 @@ import {NotificationsService} from './notifications/notifications.service';
 import {NotificationsComponent} from './notifications/notifications.component';
 import {OrganizationService} from '../organization/organization.service';
 import {CategoryService} from '../bookkeeping/category/category.service';
+import {ItemService} from '../bookkeeping/item/item.service';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import {CategoryService} from '../bookkeeping/category/category.service';
     FriendsService,
     CategoryService,
     OrganizationService,
+    ItemService,
     // WebsocketService,
     {provide: HTTP_INTERCEPTORS, useClass: OAuthInterceptor, multi: true}
     // {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}

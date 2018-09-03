@@ -7,6 +7,7 @@ import * as moment from 'moment';
 
 import { BOM } from './bom.model';
 import { OAuthService } from '../../oauth/oauth.service';
+import {Item} from '../item/item.model';
 
 @Injectable()
 export class BOMService {
@@ -46,4 +47,15 @@ export class BOMService {
     return this.BOMChose.asObservable();
   }
 
+  editBOM(id: number, data: BOM) {
+    console.log(data);
+    return this.http.patch<BOM>('http://127.0.0.1:8000/api/items/bom/' + id + '/?format=json',
+      data );
+  }
+
+  addBOM(data: BOM) {
+    console.log(data);
+    return this.http.patch<BOM>('http://127.0.0.1:8000/api/items/bom/create/?format=json',
+      data );
+  }
 }

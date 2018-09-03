@@ -32,7 +32,7 @@ import { ItemRoutingModule } from './item-routing.module';
     SharedModule
   ],
   providers: [
-    ItemService,
+    // ItemService,
   ]
 })
 export class ItemModule {}

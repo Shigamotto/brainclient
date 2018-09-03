@@ -37,6 +37,7 @@ export class BOMDetailComponent implements OnInit {
                 data.id,
                 data.date_pub,
                 data.desc,
+                data.amount,
                 data.parent,
                 data.draft,
                 data.org,

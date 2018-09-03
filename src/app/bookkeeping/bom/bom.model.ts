@@ -31,13 +31,13 @@ export class MaterialBOM {
 }
 
 export class BOM {
-  name: string; id?: number; date_pub?: string; desc?: string;
+  name: string; id?: number; date_pub?: string; desc?: string;  amount?: number; // item
   parent?: string; draft?: boolean; org?: string;
   bill?: {id?, name?, count?, price?, bom_id?}[]; bill_extra?: {id?, name?, count?, price?}[];
   path?: string;
 
   constructor(
-    name: string, id?: number, date_pub?: string, desc?: string,
+    name: string, id?: number, date_pub?: string, desc?: string, amount?: number,
     parent?: string, draft?: boolean, org?: string,
     // bill?: MaterialBOM[], bill_extra?: MaterialBOM[],
     bill?: {id?, name?, count?, price?, bom_id?}[], bill_extra?: {id?, name?, count?, price?}[],
@@ -47,6 +47,7 @@ export class BOM {
     this.name = name;
     this.date_pub = moment(date_pub).format('DD MMM YY');
     this.desc = desc;
+    this.amount = amount;
     this.parent = parent;
     this.path = path;
     this.draft = draft;

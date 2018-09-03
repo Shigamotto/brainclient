@@ -183,7 +183,7 @@ export class ItemEditComponent implements OnInit, OnDestroy {
       const id = image.name;
       const reader = new FileReader();
       reader.readAsDataURL(image);
-      reader.onload = (event) => {
+      reader.onload = (event: any) => {
         this.item.images.push({
           'name': id,
           'image': event.target.result,
@@ -357,7 +357,14 @@ export class ItemEditComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.itemService.editItem(this.id, this.itemForm.value);
+    this.itemService.editItem(this.id, this.itemForm.value).subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.log(err);
+      }
+    );
 
     // this.onCancel();
   }
