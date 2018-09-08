@@ -1,0 +1,4 @@
+:host {max-width:80vw; max-height:80vh; }
+.add-new-image {font-family:dripicons; cursor:pointer;}
+.add-new-image:before {content:"\4b"; display:block; width:60vh; height:60vh; line-height:60vh; font-size:20vh; margin:0 auto;}
+img {max-width:100%; margin:0 auto; display:block;}

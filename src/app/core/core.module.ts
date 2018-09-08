@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter, MatMomentDateModule} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 // import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
@@ -50,6 +52,7 @@ import {ItemService} from '../bookkeeping/item/item.service';
     // MDBBootstrapModule.forRoot(),
     // DeskModule, #
     // MatSlideToggleModule, #
+    MatMomentDateModule,
     FormsModule,
     SharedModule,
     // MomentModule, #
@@ -80,7 +83,10 @@ import {ItemService} from '../bookkeeping/item/item.service';
     OrganizationService,
     ItemService,
     // WebsocketService,
-    {provide: HTTP_INTERCEPTORS, useClass: OAuthInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: OAuthInterceptor, multi: true},
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+    // { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }
     // {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}
   ]
 })

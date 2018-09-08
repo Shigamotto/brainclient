@@ -1,12 +1,12 @@
 import * as moment from 'moment';
 
 export class MaterialBOM {
-  id: number; name: string; count: number; price: number;
+  id: number; name: string; count: number; price: number; bom_id?: number;
   amount?: number; desc?: string; image?: string; child?: MaterialBOM[];
 
   constructor(
-    id: number, name: string, count: number, price: number,
-    amount?: number, desc?: string, image?: string, child?: MaterialBOM[]
+    id: number, name: string, count: number, price: number, bom_id?: number,
+    desc?: string, image?: string, child?: MaterialBOM[], amount?: number,
   ) {
     this.id = id;
     this.name = name;
@@ -15,6 +15,7 @@ export class MaterialBOM {
     this.amount = amount ? amount : 0;
     this.desc = desc ? desc : '';
     this.image = image ? image : '';
+    this.bom_id = bom_id ? bom_id : undefined;
     this.child = child ? child : [];
   }
 
@@ -33,14 +34,15 @@ export class MaterialBOM {
 export class BOM {
   name: string; id?: number; date_pub?: string; desc?: string;  amount?: number; // item
   parent?: string; draft?: boolean; org?: string;
-  bill?: {id?, name?, count?, price?, bom_id?}[]; bill_extra?: {id?, name?, count?, price?}[];
+  // bill?: {id?, name?, count?, price?, bom_id?}[]; bill_extra?: {id?, name?, count?, price?}[];
+  bill?: MaterialBOM[]; bill_extra?: MaterialBOM[];
   path?: string;
 
   constructor(
     name: string, id?: number, date_pub?: string, desc?: string, amount?: number,
     parent?: string, draft?: boolean, org?: string,
     // bill?: MaterialBOM[], bill_extra?: MaterialBOM[],
-    bill?: {id?, name?, count?, price?, bom_id?}[], bill_extra?: {id?, name?, count?, price?}[],
+    bill?: MaterialBOM[], bill_extra?: MaterialBOM[],
     path?: string
   ) {
     this.id = id;

@@ -1,14 +1,31 @@
-.bk-lst-i-a {display:table; margin-top:1px; padding:5px 0; color:black; width:100%; background-color: rgba(0,0,0,.05);}
-.bk-lst-i-a:hover {background-color: rgba(0,0,0,.1);}
-.bk-lst-date, .close {display:table-cell; width: 80px; vertical-align: middle; text-align: center; font-size:.8em; color:rgba(50,58,69,.7);}
-.close:before {content: "\57"; display:inline; font-family: dripicons;}
-.close:hover {background-color: rgba(0,0,0,.05);}
-.bk-lst-title, .bk-line-name {display:table-cell; width: calc(100% - 80px - 80px - 80px - 100px); padding-left:5px;}
-.bk-lst-desc {display:none;}
-.bk-lst-status-get, .bk-lst-status-pay, .bk-line-count, .bk-line-price {display:table-cell; width: 80px;}
-.bk-lst-amount, .bk-line-amount {display:table-cell; width: 100px;}
-.bk-lst-amount.expense {color: #e21900}
-.bk-lst-amount.expense:before {content:'-'; display:inline;}
-.bk-lst-amount.income {color:green;}
-.bk-line-i {display:table-row; width:100%; background-color: rgba(0,0,0,.02);margin-top:1px; }
-.bk-lines {width:100%; display:table; margin-top:1px;}
+:host, .contents {display: grid; width:100%; background:rgba(0,0,0,.01); border-bottom:1px;}
+
+.prefix {padding:0; margin:0; width:20px;}
+
+.bk-line-i {display:inline-table; width:100%; background-color: rgba(0,0,0,.01); border-top:1px;vertical-align:middle}
+.bk-line-i:hover {background-color: rgba(0,0,0,.04);}
+.bk-line-i td {padding: 6px 10px;}
+.bk-line-i .bk-line-name {padding:2px 10px 0;}
+.bk-line-i .bk-line-price, .bk-line-i .bk-line-count {width:80px;}
+
+.bk-in {border:0; border-radius:0; background:transparent; display:block; width:100%; padding:2px 5px; margin:0; border-bottom:1px solid gray;}
+.bk-in:focus {border-bottom:2px solid rgb(50,58,68)}
+
+.add-line {font-family:dripicons; content:"\54"; padding:2px; cursor:pointer;}
+
+.bk-btn {display:table; width:100%;margin-top:1px; }
+.bk-btn .btn {display:table-cell; width:50%; float:right;}
+
+.bom-parent, .bom-org {width:50%; padding:10px 20px 0;}
+.bom-bill-name {width:100%; }
+.bk-line-i .bom-bill-image {font-family: dripicons;text-align:center;width:40px;padding:0;}
+.bom-bill-image span:before {display:inline-block; content:"\e032"; content:"\e031";color:white;font-size:2em;width:40px; height:40px;background:rgb(50,58,68); line-height:40px;}
+.bom-bill-image .add-line {background:rgb(50,58,68);color:white; margin-top:1px;}
+.bom-bill-image .add-line:hover {background:rgba(50,58,68,.8)}
+.bom-bill-image span.no-images:before {opacity:.8}
+
+.bk-line-i .remove {width:50px;padding:0;margin:0; position:relative;}
+.remove .btn {position:absolute;display:block;top:0;right:0;left:0;bottom:0;cursor:pointer;text-align:center;
+  padding:0; border-radius:0;}
+.remove .btn:hover {background-color:rgba(50,58,68,.1);}
+.remove .btn:before {content:"\e053"; font-family:dripicons; font-size:2em; line-height:50px;color:rgb(50,58,68); display:block;}

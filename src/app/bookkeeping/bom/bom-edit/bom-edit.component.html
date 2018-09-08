@@ -13,10 +13,15 @@
                formControlName="amount"
                placeholder="0" >
       <div class="bkd-simple" (click)="sheetSimpleToggle()"></div>
-      <input class="bkd-date"
+      <mat-form-field class="bkd-date">
+        <input matInput
+               [matDatepicker]="date_pub"
                type="text"
                id="date_pub"
                formControlName="date_pub" >
+        <mat-datepicker-toggle matSuffix [for]="date_pub"></mat-datepicker-toggle>
+        <mat-datepicker #date_pub></mat-datepicker>
+      </mat-form-field>
     </div>
   </div>
   <textarea autosize formControlName="desc"
@@ -48,31 +53,49 @@
     </mat-form-field>
   </div>
   <tbody class="bk-lines" formArrayName="bill">
-        <tr *ngFor="let lineCtrl of bomForm.get('bill').controls; let i = index"
-            [formGroupName]="i"
-            class="bk-line-i">
-            <td class="bk-line-name">
-                <!--<input formControlName="name" type="text" class="bk-in">-->
-              <mat-form-field class="bom-org">
-                <input type="text"
-                       placeholder="Name"
-                       aria-label="String"
-                       matInput
-                       formControlName="name"
-                       [matAutocomplete]="autoName"
-                >
-                <mat-autocomplete #autoName="matAutocomplete" >
-                  <mat-option *ngFor="let item of filteredItems | async" [value]="item.name">{{ item.name }}</mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </td>
-            <td class="bk-line-price">
-                <input formControlName="price" type="text" class="bk-in">
-            </td>
-            <td class="bk-line-count">
-                <input formControlName="count" type="text" class="bk-in">
-            </td>
-        </tr>
+    <app-bom-edit-material *ngFor="let lineCtrl of bomForm.get('bill').controls; let i = index"
+                           [inde]="i"
+                           [level]="0"
+                           [formGroupName]="i"
+                           [formControlBom]="lineCtrl"
+                           [items]="items"
+                           [filteredItems]="filteredItems"
+                           [materialBOM]="bom.bill[i]"
+                           (addImage)="addNewImage($event)"
+                           (removed)="bomForm.get('bill').removeAt($event)" >
+    </app-bom-edit-material>
+    <!--<tr *ngFor="let lineCtrl of bomForm.get('bill').controls; let i = index"-->
+            <!--[formGroupName]="i"-->
+            <!--class="bk-line-i">-->
+      <!--<td class="bom-bill-image">-->
+            <!--<span></span>-->
+            <!--<button type="button" class="btn add-line" (click)="addSubLine(i)">T</button>-->
+      <!--</td>-->
+      <!--<td class="bk-line-name">-->
+        <!--<input formControlName="id" type="hidden">-->
+        <!--<mat-form-field class="bom-bill-name">-->
+          <!--<input type="text"-->
+                 <!--placeholder="Name"-->
+                 <!--aria-label="String"-->
+                 <!--matInput-->
+                 <!--formControlName="name"-->
+                 <!--[matAutocomplete]="autoName"-->
+          <!--&gt;-->
+          <!--<mat-autocomplete #autoName="matAutocomplete" [displayWith]="displayItemFn">-->
+            <!--<mat-option *ngFor="let item of filteredItems | async" [value]="item">{{ item.name }}</mat-option>-->
+          <!--</mat-autocomplete>-->
+        <!--</mat-form-field>-->
+      <!--</td>-->
+      <!--<td class="bk-line-price">-->
+        <!--<input formControlName="price" type="text" class="bk-in">-->
+      <!--</td>-->
+      <!--<td class="bk-line-count">-->
+        <!--<input formControlName="count" type="text" class="bk-in">-->
+      <!--</td>-->
+      <!--<div class="hidden" *ngIf="lineCtrl.bom_id">-->
+        <!--<input type="hidden" formControlName="bom_id">-->
+      <!--</div>-->
+    <!--</tr>-->
   </tbody>
   <button type="button" class="btn add-line" (click)="addNewLine()">T</button>
   <div class="bk-btn">

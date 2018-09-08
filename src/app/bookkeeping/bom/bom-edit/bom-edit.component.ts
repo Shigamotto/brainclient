@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, Subscription, merge } from 'rxjs';
-import { merge as mergeStatic } from 'rxjs/operators';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { HeaderService } from '../../../core/header/header.service';
@@ -13,6 +12,7 @@ import { Item } from '../../item/item.model';
 import { ItemService } from '../../item/item.service';
 
 import { map, startWith } from 'rxjs/operators';
+import {BOMEditMaterialComponent} from './bom-edit-material/bom-edit-material.component';
 
 @Component({
   selector: 'app-bom-edit',
@@ -30,6 +30,8 @@ export class BOMEditComponent implements OnInit, OnDestroy {
   filteredParents: Observable<BOM[]>;
   items: Item[];
   filteredItems: Observable<Item[]>;
+
+  images: {id: number, name: string, image: File}[] = [];
 
   subscription: Subscription;
   public bom: BOM = BOM.EMPTY_MODEL;
@@ -107,11 +109,7 @@ export class BOMEditComponent implements OnInit, OnDestroy {
                 if (data['bill']) {
                   for (const line of data.bill) {
                     (<FormArray>this.bomForm.controls['bill']).push(
-                      new FormGroup({
-                        'name': new FormControl(line.name),
-                        'count': new FormControl(line.count),
-                        'price': new FormControl(line.price),
-                      })
+                      BOMEditMaterialComponent.buildItem(line)
                     );
                   }
                 }
@@ -149,7 +147,15 @@ export class BOMEditComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.editMode) {
-      console.log('edit sheet');
+      const data = this.bomForm.value;
+      console.log(data);
+      if (data.bill) {
+        for (const bill_line in data.bill) {
+          console.log(bill_line);
+          data.bill[bill_line].id = data.bill[bill_line].name.id ? data.bill[bill_line].name.id : data.bill[bill_line].id;
+          data.bill[bill_line].name = data.bill[bill_line].name.name ? data.bill[bill_line].name.name : data.bill[bill_line].name;
+        }
+      }
       this.bomService.editBOM(this.id, this.bomForm.value).subscribe(
         res => {console.log(res); },
       error => {console.log(error); }
@@ -167,11 +173,7 @@ export class BOMEditComponent implements OnInit, OnDestroy {
 
   addNewLine() {
     (<FormArray>this.bomForm.controls['bill']).push(
-      new FormGroup({
-        'name': new FormControl(''),
-        'price': new FormControl(''),
-        'count': new FormControl(''),
-      })
+      BOMEditMaterialComponent.buildItem()
     );
     const bill_length = (this.bomForm.controls['bill'] as FormArray).length;
     this.filteredItems = merge(this.filteredItems, (this.bomForm.controls['bill'] as FormArray).controls[bill_length - 1].get('name')
@@ -182,6 +184,11 @@ export class BOMEditComponent implements OnInit, OnDestroy {
         map(name => name ? this._filterItems(name) : this.items.slice())
       )
     );
+  }
+
+  addNewImage(data: any) {
+    this.images.push(data);
+    // console.log(this.images);
   }
 
   private initForm() {
@@ -229,8 +236,5 @@ export class BOMEditComponent implements OnInit, OnDestroy {
   private _filterItems(value: string): Item[] {
     const filterValue = value.toLowerCase();
     return this.items.filter(option => option.name.toLowerCase().includes(filterValue));
-  }
-  displayItemFn(data?: Item): string | undefined {
-    return data ? data.name : undefined;
   }
 }

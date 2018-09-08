@@ -14,9 +14,9 @@
 .item-lst-i-a td:nth-child(n+1),
 .item-lines td:nth-child(n+1) {border-left:1px solid white;}
 .item-line-i:hover td {background-color:rgba(0,0,0,.06)}
-.item-name {width:50%;}
+.item-name {width:40%;}
 .item-cat {}
-.item-produce {}
+.item-produce {width:30%;}
 .item-cost, .item-prop-value {display:table-cell; width: 100px;}
 .item-lines .item-desc {padding:6px 10px;}
 .item-prop-name {padding:3px 5px;}

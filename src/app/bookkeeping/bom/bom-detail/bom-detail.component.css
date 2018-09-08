@@ -28,5 +28,4 @@ width:14px; height:2px; transform: rotate(45deg); top:calc(50% - 5px); left:calc
 
 .bk-lines {width:100%; display:table; border-spacing: 0 1px}
 .bk-lines.hide {display:none}
-.bk-line-i {display:table-row; width:100%; background-color: rgba(0,0,0,.02); border-top:1px;}
-.bk-line-i:hover {background-color: rgba(0,0,0,.04);}
+.bk-line-i {display:table-row;width:100%;background-color: rgba(0,0,0,.02);}

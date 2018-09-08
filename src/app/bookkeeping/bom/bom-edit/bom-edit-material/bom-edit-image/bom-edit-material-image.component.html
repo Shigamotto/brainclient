@@ -1,0 +1,21 @@
+<!-- Image block -->
+<img [src]="data.image" *ngIf="data.image">
+<img [src]="image.image" *ngIf="image">
+
+<!-- New image -->
+<input class="hidden-button" type="file" #newFileInput (change)="addNewImage($event)" />
+<button type="button" class="btn remove-image" *ngIf="data.image || image">Remove</button>
+
+<!-- Show old image-->
+<button type="button"
+        class="btn add-new-image"
+        (click)="newFileInput.click()"
+        *ngIf="!data.image && !image"></button>
+<button type="button"
+        class="btn add-line"
+        (click)="SavingData()"
+        *ngIf="image">Save</button>
+
+<button type="button"
+        class="btn add-line"
+        (click)="closeDialog()">Close</button>

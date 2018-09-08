@@ -1,16 +1,45 @@
-<tr (click)="onClick()" class="bk-lst-i-a">
-    <td class="bk-lst-date">{{ sheet.date_pub }}</td>
-    <td class="bk-lst-title">{{ sheet.title }}</td>
-    <td class="bk-lst-status-pay">{{ sheet.status_pay }}</td>
-    <td class="bk-lst-status-get">{{ sheet.status_get }}</td>
-    <td class="bk-lst-amount expense">{{ sheet.amount }}</td>
-</tr>
-<tbody *ngIf="clicked" class="bk-lines">
-    <tr *ngFor="let line of sheet.lines; let iLine = index" class="bk-line-i" >
-        <td class="close" rowspan="0" *ngIf="iLine == 0" (click)="onClose()"></td>
-        <td class="bk-line-name">{{ line.name}}</td>
-        <td class="bk-line-price">{{ line.price}}</td>
-        <td class="bk-line-count">{{ line.count }}</td>
-        <td class="bk-line-amount">{{ line.amount }}</td>
-    </tr>
+<tbody class="contents" [formGroup]="formControlBom" >
+  <tr class="bk-line-i">
+    <td class="prefix" *ngFor="let prefix of range"></td>
+    <td class="bom-bill-image">
+      <span (click)="openImage()" [ngClass]="{'no-images': !materialBOM.image}" ></span>
+      <button type="button" class="btn add-line" (click)="addSubLine(i)">T</button>
+    </td>
+    <td class="bk-line-name">
+      <input formControlName="id" type="hidden">
+      <mat-form-field class="bom-bill-name">
+        <input type="text"
+               placeholder="Name"
+               aria-label="String"
+               matInput
+               formControlName="name"
+               [matAutocomplete]="autoName" />
+        <mat-autocomplete #autoName="matAutocomplete" [displayWith]="displayItemFn">
+          <mat-option *ngFor="let item of filteredItems | async" [value]="item">{{ item.name }}</mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </td>
+    <td class="bk-line-count">
+      <input formControlName="count" type="text" class="bk-in" matTooltip="Count" matTooltipPosition="above" />
+    </td>
+    <td class="bk-line-price">
+      <input formControlName="price" type="text" class="bk-in" matTooltip="Price" matTooltipPosition="above" />
+    </td>
+    <td class="remove">
+      <button type="button" class="btn"
+              (click)="removed.emit(inde)"></button>
+    </td>
+  </tr>
+  <div class="contents" formArrayName="child">
+    <app-bom-edit-material *ngFor="let subLineCtrl of formControlBom.get('child').controls; let i = index"
+                           [formGroupName]="i"
+                           [inde]="i"
+                           [level]="level+1"
+                           [formControlBom]="subLineCtrl"
+                           [items]="items"
+                           [filteredItems]="filteredItems"
+                           [materialBOM]="materialBOM.child[i]"
+                           (removed)="formControlBom.get('child').removeAt($event)" >
+    </app-bom-edit-material>
+  </div>
 </tbody>

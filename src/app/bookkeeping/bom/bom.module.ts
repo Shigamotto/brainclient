@@ -7,8 +7,10 @@ import { BOMComponent } from './bom.component';
 import { BOMListComponent } from './bom-list/bom-list.component';
 import { BOMDetailComponent } from './bom-detail/bom-detail.component';
 import { BOMDetailMaterialComponent } from './bom-detail/bom-detail-material/bom-detail-material.component';
+import { BomDetailMaterialImageComponent } from './bom-detail/bom-detail-material/bom-detail-image/bom-detail-material-image.component';
 import { BOMEditComponent } from './bom-edit/bom-edit.component';
 import { BOMEditMaterialComponent } from './bom-edit/bom-edit-material/bom-edit-material.component';
+import { BomEditMaterialImageComponent } from './bom-edit/bom-edit-material/bom-edit-image/bom-edit-material-image.component';
 import { BOMMenuComponent } from './bom-menu/bom-menu.component';
 
 import { BOMService } from './bom.service';
@@ -24,9 +26,15 @@ import { BOMRoutingModule } from './bom-routing.module';
     BOMListComponent,
     BOMDetailComponent,
     BOMDetailMaterialComponent,
+    BomDetailMaterialImageComponent,
     BOMEditComponent,
     BOMEditMaterialComponent,
+    BomEditMaterialImageComponent,
     BOMMenuComponent
+  ],
+  entryComponents: [
+    BomDetailMaterialImageComponent,
+    BomEditMaterialImageComponent
   ],
   imports: [
     CommonModule,

@@ -15,10 +15,11 @@
 <div class="bkd-desc" [innerHTML]="bom.desc"></div>
 <tbody class="bk-lines" [ngClass]="{'hide':extraMode}">
     <app-bom-detail-material
-            class="bk-line-i"
-            *ngFor="let material of bom.bill; let i = index"
-            [materialBOM]="material"
-            [index]="i">
+      class="bk-line-i"
+      *ngFor="let material of bom.bill; let i = index"
+      [materialBOM]="material"
+      [index]="i"
+      [level]="0">
     </app-bom-detail-material>
 </tbody>
 <tbody class="bk-lines" [ngClass]="{'hide':!extraMode}" >

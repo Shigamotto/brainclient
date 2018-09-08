@@ -1,6 +1,19 @@
+:host, .contents {display: grid; width:100%; background:rgba(0,0,0,.01); }
+
+.bom-line-i {display:inline-table;width:100%; background-color: rgba(0,0,0,.01); border-top:1px;}
+.bom-line-i:hover {background-color: rgba(0,0,0,.02);}
+
+.bk-line-i {display:table-row; width:100%; background-color: rgba(0,0,0,.01); }
 .bk-line-index {width:40px; text-align:center;}
 .bk-line-name, .bk-line-desc {padding:10px 10px 10px 20px; display:table-cell;
   width:calc(50% - 100px); border-left:1px solid white;}
 .bk-line-desc {color:rgba(0,0,0,.3)}
 .bk-line-value, .bk-line-cost, .bk-line-amount {width:80px; vertical-align:middle;
   padding:10px; text-align:right; border-left:1px solid white; }
+
+.prefix {padding:0; margin:0; width:20px;}
+.bom-line-i .bom-bill-image {font-family: dripicons;text-align:center;width:40px;height:40px;padding:0;position:relative;}
+.bom-bill-image span {position:absolute;top:0;left:0;right:0;bottom:0;display:block;}
+.bom-bill-image span:before {display:inline-block; content:"\e032"; content:"\e031";color:white;
+  font-size:2em;width:40px; height:40px;background:rgb(50,58,68); line-height:40px;}
+.bom-bill-image span.no-images:before {background: rgb(160,160,160);}

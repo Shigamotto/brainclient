@@ -1,5 +1,19 @@
-<td class="bk-line-index">{{ index+1 }}</td>
-<td class="bk-line-name">{{ materialBOM.name }}</td>
-<td class="bk-line-desc">{{ materialBOM.desc }}</td>
-<td class="bk-line-value">{{ materialBOM.count }}</td>
-<td class="bk-line-cost">{{ materialBOM.price }}</td>
+<tbody class="contents">
+  <tr class="bom-line-i">
+    <td class="prefix" *ngFor="let prefix of range"></td>
+    <td class="bom-bill-image">
+      <span *ngIf="materialBOM.image" (click)="openImage()" ></span>
+      <span *ngIf="!materialBOM.image" class="no-images"></span>
+    </td>
+    <td class="bk-line-name" >{{ materialBOM.name }}</td>
+    <td class="bk-line-value" >{{ materialBOM.count }}</td>
+    <td class="bk-line-cost" >{{ materialBOM.price }}</td>
+  </tr>
+  <app-bom-detail-material
+    class="bk-line-i"
+    *ngFor="let material of materialBOM.child; let i = index"
+    [materialBOM]="material"
+    [index]="i"
+    [level]="level+1">
+  </app-bom-detail-material>
+</tbody>
