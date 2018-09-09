@@ -66,9 +66,15 @@ export class ItemService {
     return this.ItemChose.asObservable();
   }
 
-  editItem(id: number, item: Item | any) {
-    console.log(item);
+  editItem(id: number | string, item: Item | any) {
+    // console.log(item);
     return this.http.patch<Item>('http://127.0.0.1:8000/api/items/' + id + '/?format=json',
+      item );
+  }
+
+  addItem(item: Item | any) {
+    console.log(item);
+    return this.http.post<Item>('http://127.0.0.1:8000/api/items/create/?format=json',
       item );
   }
 

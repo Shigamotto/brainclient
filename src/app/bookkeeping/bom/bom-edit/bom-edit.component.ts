@@ -1,17 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable, Subscription, merge } from 'rxjs';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { Observable, Subscription, merge, from, of, empty } from 'rxjs';
+import { map, startWith, concatMap } from 'rxjs/operators';
 
 import { HeaderService } from '../../../core/header/header.service';
 import { BOMService } from '../bom.service';
-import { BOM } from '../bom.model';
+import { BOM, MaterialBOM } from '../bom.model';
 import { OrganizationService } from '../../../organization/organization.service';
 import { Organization } from '../../../organization/organization.model';
 import { Item } from '../../item/item.model';
 import { ItemService } from '../../item/item.service';
 
-import { map, startWith } from 'rxjs/operators';
 import {BOMEditMaterialComponent} from './bom-edit-material/bom-edit-material.component';
 
 @Component({
@@ -31,7 +31,7 @@ export class BOMEditComponent implements OnInit, OnDestroy {
   items: Item[];
   filteredItems: Observable<Item[]>;
 
-  images: {id: number, name: string, image: File}[] = [];
+  images: {id: number, name: string, image: File, file: File}[] = [];
 
   subscription: Subscription;
   public bom: BOM = BOM.EMPTY_MODEL;
@@ -145,15 +145,102 @@ export class BOMEditComponent implements OnInit, OnDestroy {
     // this.headService.setWidget( undefined );
   }
 
+  findById(id, bill = this.bomForm.value.bill) {
+    const item = bill.filter( (data: MaterialBOM) => id === data.id);
+    if (item.length > 0) {
+      return item;
+    } else if ( item.child ) {
+      this.findById(id, item.child);
+    } else {
+      return undefined;
+    }
+  }
+
+  findImageId(id, images = this.images) {
+    return images.filter( (data: {id: number, name: string, image: File}) => id === data.id);
+  }
+
+  childSubmit(data: MaterialBOM) {
+    if (data.child.length > 0) {
+      from(data.child).pipe(
+        concatMap( child => {
+          return of(this.childSubmit(child));
+        })
+      );
+    } else {
+
+      console.log(data);
+      if (data.id) {
+        console.log('I have id ${data.id}');
+        return this.itemService.editItem(data.id, {
+          name: data.name
+        }).subscribe(
+          (item_response: any) => {
+            this.imageSubmit(item_response.id, data.id).subscribe( (photo_response: any) => {
+              console.log(photo_response);
+            });
+          });
+      } else {
+        console.log('I dont have id :(');
+        console.log(data);
+        return this.itemService.addItem({
+          name: data.name
+        }).subscribe(
+          (response: any) => {
+            console.log(response);
+            data.id = response.id;
+          });
+      }
+    }
+  }
+
+  imagesSubmit(id) {
+    if (this.images) {
+      for (const image of this.images) {
+        const item = this.findById(image.id);
+        const formData = new FormData();
+        formData.append('name', image.name);
+        // formData.append('to_send', true);
+        // formData.append('is_top', true);
+        // formData.append('desc', '');
+        if (image.image) { formData.append('image', image.image); }
+        this.itemService.postImage(this.id, formData, image.id).subscribe(
+          res => {
+            console.log(res);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+      }
+    }
+  }
+
+  imageSubmit(id, find_id?) {
+    const get_image = find_id ? this.findImageId(find_id) : this.findImageId(id) ;
+    if (get_image.length > 0) {
+      const image = get_image[0];
+      const formData = new FormData();
+      formData.append('name', image.name);
+      formData.append('desc', '');
+      formData.append('to_send', 'true');
+      formData.append('is_top', 'true');
+      if (image.image) {
+        console.log(image);
+        formData.append('image', image.file);
+      }
+      return this.itemService.postImage(id, formData);
+    }
+    return empty();
+  }
+
   onSubmit() {
+    console.log(this.bomForm.value);
     if (this.editMode) {
       const data = this.bomForm.value;
-      console.log(data);
       if (data.bill) {
-        for (const bill_line in data.bill) {
-          console.log(bill_line);
-          data.bill[bill_line].id = data.bill[bill_line].name.id ? data.bill[bill_line].name.id : data.bill[bill_line].id;
-          data.bill[bill_line].name = data.bill[bill_line].name.name ? data.bill[bill_line].name.name : data.bill[bill_line].name;
+        for (const bill_line of data.bill) {
+          this.childSubmit(bill_line);
         }
       }
       this.bomService.editBOM(this.id, this.bomForm.value).subscribe(
@@ -164,7 +251,7 @@ export class BOMEditComponent implements OnInit, OnDestroy {
       console.log('add sheet');
       this.bomService.addBOM(this.bomForm.value);
     }
-    this.onCancel();
+    // this.onCancel();
   }
 
   onCancel() {
@@ -172,8 +259,14 @@ export class BOMEditComponent implements OnInit, OnDestroy {
   }
 
   addNewLine() {
+    const subline = MaterialBOM.EMPTY_MODEL;
+    subline.id = 'New ';
+    this.bom.bill.push(subline);
+    console.log(this.bom.bill);
+
+    // make new form array
     (<FormArray>this.bomForm.controls['bill']).push(
-      BOMEditMaterialComponent.buildItem()
+      BOMEditMaterialComponent.buildItem( undefined, subline.id)
     );
     const bill_length = (this.bomForm.controls['bill'] as FormArray).length;
     this.filteredItems = merge(this.filteredItems, (this.bomForm.controls['bill'] as FormArray).controls[bill_length - 1].get('name')
@@ -184,6 +277,14 @@ export class BOMEditComponent implements OnInit, OnDestroy {
         map(name => name ? this._filterItems(name) : this.items.slice())
       )
     );
+  }
+  getNewID(id: string) {
+    if (id.toString().startsWith('New')) {
+      return id;
+    } else {
+      return id;
+    }
+
   }
 
   addNewImage(data: any) {

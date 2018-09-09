@@ -1,11 +1,11 @@
 import * as moment from 'moment';
 
 export class MaterialBOM {
-  id: number; name: string; count: number; price: number; bom_id?: number;
+  id: string; name: string; count: number; price: number; bom_id?: number;
   amount?: number; desc?: string; image?: string; child?: MaterialBOM[];
 
   constructor(
-    id: number, name: string, count: number, price: number, bom_id?: number,
+    id: string, name: string, count: number, price: number, bom_id?: number,
     desc?: string, image?: string, child?: MaterialBOM[], amount?: number,
   ) {
     this.id = id;
@@ -20,13 +20,10 @@ export class MaterialBOM {
   }
 
   static readonly EMPTY_MODEL = {
-    id: 0,
+    id: '',
     name: '',
-    value: 0,
-    cost: 0,
-    amount: 0,
-    desc: '',
-    image: '',
+    count: 0,
+    price: 0,
     child: []
   };
 }

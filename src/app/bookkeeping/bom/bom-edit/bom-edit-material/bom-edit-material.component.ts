@@ -22,6 +22,8 @@ export class BOMEditMaterialComponent implements OnInit {
   @Input() level: number;
   @Input() inde: string;
   range = [];
+  image: {id: string, image?: File, file?: File};
+
 
   @Output()
   public removed: EventEmitter<number> = new EventEmitter<number>();
@@ -31,11 +33,15 @@ export class BOMEditMaterialComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
-    // console.log(this.materialBOM);
+    if (this.materialBOM.id.toString().startsWith('New')) {
+      this.materialBOM.id = this.materialBOM.id + '.' + this.inde;
+    }
+    this.image = { id: this.materialBOM.id };
     this.range = new Array(this.level);
+    console.log(this.materialBOM);
   }
 
-  static buildItem(line?) {
+  static buildItem(line?, id?) {
     const childs = new FormArray([]);
 
     if (line) {
@@ -51,35 +57,52 @@ export class BOMEditMaterialComponent implements OnInit {
         'name': new FormControl(line.name ),
         'count': new FormControl(line.count ),
         'price': new FormControl(line.price),
+        'image': new FormControl(line.image),
         'child': childs,
       });
     } else {
+      const newId = id ? id : '';
       return new FormGroup({
-        'id': new FormControl( ''),
+        'id': new FormControl( newId),
         'name': new FormControl( ''),
         'count': new FormControl( ''),
         'price': new FormControl( ''),
+        'image': new FormControl(''),
         'child': childs,
       });
     }
   }
 
   openImage(): void {
+    let data = {};
+    if (this.image) {
+      data = {
+        image: this.materialBOM.image ? this.materialBOM.image : this.image.image,
+        id: this.image.id
+      };
+    }
     const dialogRef = this.dialog.open(BomEditMaterialImageComponent, {
-      data: { image: this.materialBOM.image, id: this.materialBOM.id }
+      data: data
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.materialBOM.image = result.image;
+        this.image['id'] = result.id;
+        this.image['image'] = result.image;
+        this.image['file'] = result.file;
         this.addImage.emit(result);
       }
     });
   }
 
   addSubLine() {
-    (<FormArray>this.formControlBom.controls['child']).push(
-      BOMEditMaterialComponent.buildItem()
-    );
+    const subline = MaterialBOM.EMPTY_MODEL;
+    if (this.materialBOM.id.toString().startsWith('New')) {
+      subline.id = this.materialBOM.id;
+    } else {
+      subline.id = 'New ' + this.materialBOM.id;
+    }
+    this.materialBOM.child.push(subline);
+    (<FormArray>this.formControlBom.controls['child']).push( BOMEditMaterialComponent.buildItem( undefined, subline.id) );
   }
 
   displayItemFn(data?: Item | string): string | undefined {
@@ -88,6 +111,26 @@ export class BOMEditMaterialComponent implements OnInit {
     } else {
       return data.name;
     }
+  }
+
+  imageIsHere(): boolean {
+    if (this.materialBOM) {
+      if (this.materialBOM.image) {
+        return false;
+      } else if (this.image.image) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  materialBOMChild(i: number): MaterialBOM {
+    if (this.materialBOM.child) {
+      if (this.materialBOM.child[i]) {
+        return this.materialBOM.child[i];
+      }
+    }
+    return MaterialBOM.EMPTY_MODEL;
   }
 
 }

@@ -2,7 +2,8 @@
   <tr class="bk-line-i">
     <td class="prefix" *ngFor="let prefix of range"></td>
     <td class="bom-bill-image">
-      <span (click)="openImage()" [ngClass]="{'no-images': !materialBOM.image}" ></span>
+      <input formControlName="image" type="hidden" />
+      <span (click)="openImage()" [ngClass]="{'no-images': imageIsHere() }" ></span>
       <button type="button" class="btn add-line" (click)="addSubLine(i)">T</button>
     </td>
     <td class="bk-line-name">

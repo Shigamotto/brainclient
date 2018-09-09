@@ -10,14 +10,17 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./bom-edit-material-image.component.css']
 })
 export class BomEditMaterialImageComponent implements OnInit {
-  image: {id: number, name: string, image: File};
+  image: {id: string, name: string, image: File, file: File};
+  file: File;
 
   constructor(
     public dialogRef: MatDialogRef<BomEditMaterialImageComponent>,
     @Inject(MAT_DIALOG_DATA) public data: MaterialBOM
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log(this.data);
+  }
 
   onNoClick(): void {
     this.dialogRef.close(this.image);
@@ -30,10 +33,15 @@ export class BomEditMaterialImageComponent implements OnInit {
     reader.readAsDataURL(imageFile);
     reader.onload = (event: any) => {
       this.image = {
-        'id': this.data.id,
+        'id': this.data ? this.data.id : '',
         'name': fileName,
         'image': event.target.result,
+        'file': imageFile,
       };
+      // if (this.data) {
+      //   this.image['id'] = this.data.id ? this.data.id : '';
+      // }
+      this.file = imageFile;
     };
   }
 
