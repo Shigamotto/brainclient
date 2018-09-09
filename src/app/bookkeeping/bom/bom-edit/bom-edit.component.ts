@@ -160,6 +160,20 @@ export class BOMEditComponent implements OnInit, OnDestroy {
     return images.filter( (data: {id: number, name: string, image: File}) => id === data.id);
   }
 
+  chiSubmit(data: MaterialBOM) {
+    if (data.child.length > 0) {
+      from(data.child).pipe(
+        concatMap( child => of(this.childSubmit(child)) )
+      );
+    } else {
+      if (data.id) {
+        return this.itemService.editItem(data.id, { name: data.name });
+      } else {
+        return this.itemService.addItem({ name: data.name });
+      }
+    }
+  }
+
   childSubmit(data: MaterialBOM) {
     if (data.child.length > 0) {
       from(data.child).pipe(
@@ -235,9 +249,12 @@ export class BOMEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.bomForm.value);
     if (this.editMode) {
       const data = this.bomForm.value;
+      // from(data.bill).pipe(
+      //   concatMap( (bill: MaterialBOM) => of(this.chiSubmit(bill))),
+      //   concatMap( (item) => of(this.imageSubmit( item.id, )))
+      // );
       if (data.bill) {
         for (const bill_line of data.bill) {
           this.childSubmit(bill_line);
