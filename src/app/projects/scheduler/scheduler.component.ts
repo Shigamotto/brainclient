@@ -12,8 +12,8 @@ import * as moment from 'moment';
 import 'dhtmlx-scheduler';
 import 'dhtmlx-scheduler/codebase/ext/dhtmlxscheduler_year_view';
 import 'dhtmlx-scheduler/codebase/ext/dhtmlxscheduler_agenda_view';
-import {} from '@types/dhtmlxscheduler';
-
+import {} from 'dhtmlxscheduler';
+// import 'dhtmlxscheduler';
 
 @Component({
     encapsulation: ViewEncapsulation.None,

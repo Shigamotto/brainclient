@@ -31,7 +31,7 @@ export class BOMService {
         (data: BOM[]) => {
           this.setBOMs(data);
       });
-  };
+  }
 
   choseBOM(data: BOM) {
     this.bom = data;

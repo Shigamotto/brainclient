@@ -54,15 +54,16 @@
   </div>
   <tbody class="bk-lines" formArrayName="bill">
     <app-bom-edit-material *ngFor="let lineCtrl of bomForm.get('bill').controls; let i = index"
-                           [inde]="i"
-                           [level]="0"
-                           [formGroupName]="i"
-                           [formControlBom]="lineCtrl"
-                           [items]="items"
-                           [filteredItems]="filteredItems"
-                           [materialBOM]="bom.bill[i]"
+                           class="bom-material"
+                           [formGroupName]="i" [formControlBom]="lineCtrl"
+                           [items]="items" [filteredItems]="filteredItems"
+                           [materialBOM]="bomStorage.getMaterial(i)"
+                           draggable="True" [id]="i"
+                           (dragstart)="dragStart($event)" (dragover)="allowDrop($event, i)" (drop)="drop($event)"
+                           (dragleave)="dragLeave(i)" ondragexit="dragLeave(i)"
                            (addImage)="addNewImage($event)"
-                           (removed)="bomForm.get('bill').removeAt($event)" >
+                           (addSubLineMaterial)="addNewLine(i)"
+                           (removed)="removeBomMaterial(i)">
     </app-bom-edit-material>
     <!--<tr *ngFor="let lineCtrl of bomForm.get('bill').controls; let i = index"-->
             <!--[formGroupName]="i"-->

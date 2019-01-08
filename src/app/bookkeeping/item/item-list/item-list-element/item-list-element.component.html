@@ -1,8 +1,12 @@
-<tr (click)="onClick()" class="item-lst-i-a">
-  <td class="item-name">{{ item.name }}</td>
+<tr class="item-lst-i-a">
+  <td class="item-check">
+    <input type="checkbox" (change)="onToggle()" [(ngModel)]="checkboxFlag">
+  </td>
+  <td class="item-name" (click)="onClick()" >{{ item.name }}</td>
   <td class="item-cat">{{ item.category_name }}</td>
   <td class="item-produce">{{ item.produce_name }}</td>
   <td class="item-cost">{{ item.cost }}</td>
+  <td class="item-pic" (click)="openPicture()" [ngClass]="{'pic-pic': item.images.length > 0 }"></td>
 </tr>
 <tbody *ngIf="clicked" class="item-lines">
   <tr><td colspan="3" class="item-desc">{{item.desc}}</td></tr>
@@ -12,3 +16,14 @@
     <td class="item-prop-value">{{ line.value}}</td>
   </tr>
 </tbody>
+
+<!-- Блок всплывающего изображения -->
+<div #images class="item-images" [ngClass]="{'open': picIsOpen}" *ngIf="item.images.length > 0">
+  <div class="item-image-content">
+    <span class="close" (click)="openPicture()"></span>
+    <div class="item-image single" >
+      <img *ngIf="item.images[0].image" src="http://127.0.0.1:8000{{ item.images[0].image }}">
+    </div>
+  </div>
+  <div class="item-image-backstage" (click)="openPicture()"></div>
+</div>

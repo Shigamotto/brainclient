@@ -43,13 +43,10 @@
         </accordion-group>
     </accordion>
 </div>
-<div class="sidebar" *ngIf="!authService.isAuthenticated()" >
-    <div class="user-offline">
-        <img src="../../../assets/logo.svg" class="avatar">
-    </div>
+<div class="sidebar-top" *ngIf="!authService.isAuthenticated()" >
     <nav class="sidebar-nav">
-        <a routerLink="/signin" routerLinkActive="active" class="sidebar-i login">Login</a>
-        <a routerLink="/about" routerLinkActive="active" class="sidebar-i about">about</a>
-        <a routerLink="/blog" routerLinkActive="active" class="sidebar-i blog">Blog</a>
+        <a routerLink="/signin" routerLinkActive="active" class="sidebar-top-i">Login</a>
+        <a routerLink="/about" routerLinkActive="active" class="sidebar-top-i">about</a>
+        <a routerLink="/blog" routerLinkActive="active" class="sidebar-top-i">Blog</a>
     </nav>
 </div>

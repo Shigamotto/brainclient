@@ -2,11 +2,13 @@ import * as moment from 'moment';
 
 export class MaterialBOM {
   id: string; name: string; count: number; price: number; bom_id?: number;
-  amount?: number; desc?: string; image?: string; child?: MaterialBOM[];
+  amount?: number; desc?: string; image?: string; over: boolean; child?: MaterialBOM[];
+  bom_service_id?: string; bom_service_child?: string[]; bom_service_level?: number; bom_service_parent?: string; bom_service_over?: boolean;
 
   constructor(
     id: string, name: string, count: number, price: number, bom_id?: number,
     desc?: string, image?: string, child?: MaterialBOM[], amount?: number,
+    bom_service_id?: string, bom_service_child?: string[], bom_service_level?: number, bom_service_parent?: string, bom_service_over?: boolean
   ) {
     this.id = id;
     this.name = name;
@@ -17,6 +19,14 @@ export class MaterialBOM {
     this.image = image ? image : '';
     this.bom_id = bom_id ? bom_id : undefined;
     this.child = child ? child : [];
+    this.over = false;
+    this.bom_service_id = bom_service_id ? bom_service_id : undefined;
+    this.bom_service_child = bom_service_child ? bom_service_child : [];1
+    this.bom_service_level = bom_service_level ? bom_service_level : 0;
+    this.bom_service_over = bom_service_over ? bom_service_over : false;
+    if (bom_service_parent) {
+      this.bom_service_parent = bom_service_parent;
+    }
   }
 
   static readonly EMPTY_MODEL = {
@@ -24,13 +34,15 @@ export class MaterialBOM {
     name: '',
     count: 0,
     price: 0,
-    child: []
+    over: false,
+    child: [],
+    bom_service_level: -1,
   };
 }
 
 export class BOM {
   name: string; id?: number; date_pub?: string; desc?: string;  amount?: number; // item
-  parent?: string; draft?: boolean; org?: string;
+  parent?: string; draft?: boolean; org?: string; bom_service_bill?: string[];
   // bill?: {id?, name?, count?, price?, bom_id?}[]; bill_extra?: {id?, name?, count?, price?}[];
   bill?: MaterialBOM[]; bill_extra?: MaterialBOM[];
   path?: string;

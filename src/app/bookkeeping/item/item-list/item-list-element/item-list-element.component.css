@@ -14,6 +14,10 @@
 .item-lst-i-a td:nth-child(n+1),
 .item-lines td:nth-child(n+1) {border-left:1px solid white;}
 .item-line-i:hover td {background-color:rgba(0,0,0,.06)}
+.item-lst-i-a .item-pic {width:26px;background-color:rgb(205,205,205);text-align:center;}
+.item-lst-i-a .item-pic.pic-pic {background-color:rgb(50,58,69)}
+.item-pic:after {display: inline-block;content: "\e031";color: white;font-size: 14px;font-family: dripicons;}
+.item-check {width:36px;padding:0; text-align:center;}
 .item-name {width:40%;}
 .item-cat {}
 .item-produce {width:30%;}
@@ -21,3 +25,22 @@
 .item-lines .item-desc {padding:6px 10px;}
 .item-prop-name {padding:3px 5px;}
 .item-prop-value {padding:3px 5px;}
+
+.item-images {display:none;}
+.item-image-content {padding:20px 0 20px 20px;position:fixed;display:block; left:50%;top:50%;transform:translateX(-50%) translateY(-50%);z-index:9999; background:white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5); max-width:100%; max-height:calc(100% - 40px); }
+.item-image-backstage {z-index:100;display:block; position:fixed; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,.2)}
+.item-images.open {display:block;}
+.item-images .close {position:absolute; display:block; top:0; right:0; width:20px; height:20px; cursor:pointer;text-align:center;}
+.item-images .close:hover {background-color:rgba(50,58,68,.1);}
+.item-images .close:before {content:"\39"; font-family:dripicons; font-size:14px; line-height:20px;color:rgb(50,58,68);}
+.item-image {display:none; }
+.item-image.open {display:block;width:80%;}
+.item-image.open img {max-height:calc(100vh - 40px - 40px); margin: 0 auto; display:block;}
+.item-image.single {display:block; width:100%;padding-right:20px;}
+.item-image-list {padding:0 0 5px 20px; margin:0; width:20%;float:right;}
+.item-image-list {list-style: none;}
+.item-image-list li {margin-top:1px; background:rgba(50,58,68,.06); cursor:pointer; padding:4px 6px; line-height:1.1;}
+.item-image-list li:hover {background:rgba(50,58,68,.1)}
+.item-image-list .to_send .status:before {display:inline-block; float:left; content:"\e015"; margin-right:5px; font-family: dripicons;}
+.item-image-list .is_top .status:after {display:inline-block; float:left; content:"\e013"; margin-right:5px; font-family: dripicons;}

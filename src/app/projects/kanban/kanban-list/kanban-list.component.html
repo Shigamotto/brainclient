@@ -1,9 +1,19 @@
-<div class="list" (dragover)="allowDrop($event)" (drop)="drop($event)">
+<div class="column" [ngClass]="{'drag-enter': dragEnterProperty}">
+<div class="list"
+     (drop)="drop($event)"
+     (dragover)="allowDrop($event)"
+     (dragleave)="dragLeave()" >
     <p class="list__title"><strong>{{list.name}}</strong></p>
     <div class="cards">
-        <app-kanban-card *ngFor="let cardId of list.cards" [card]="cardStore.getCard(cardId)"></app-kanban-card>
+        <app-kanban-card *ngFor="let cardId of list.cards"
+                         [card]="cardStore.getCard(cardId)"
+                         (dragIsFinish)="dragIsFinish()"></app-kanban-card>
     </div>
 
-    <input #addCardInput type="text" (keyup.enter)="onEnter(addCardInput.value); addCardInput.value=''; displayAddCard=false;" *ngIf="displayAddCard" autofocus>
+    <input #addCardInput type="text"
+           (keyup.enter)="onEnter(addCardInput.value); addCardInput.value=''; displayAddCard=false;"
+           *ngIf="displayAddCard"
+           autofocus />
     <a class="list__newcard" (click)="toggleDisplayAddCard();">Add a card...</a>
+</div>
 </div>

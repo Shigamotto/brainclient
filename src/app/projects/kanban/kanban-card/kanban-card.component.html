@@ -1,6 +1,15 @@
-<p class="card " draggable="true" (dragstart)="dragStart($event)"
-   id="{{card.id}}" [ngClass]="{'need-to-confirm': card.confirming }" >
-  <b> {{card.title}}</b>
- {{card.desc}}
-  <span>{{card.update}}</span>
-</p>
+<div class="card "
+   draggable="true"
+   (dragstart)="dragStart($event)"
+   (dragend)="dragEnd()"
+   (dragover)="dragOver()"
+   (dragleave)="dragLeave()"
+   id="{{card.id}}" [ngClass]="{
+      'need-to-confirm': card.confirming,
+      'dragging': draggingStart
+   }" >
+  <span class="card-put-before" *ngIf="card.finished"></span>
+  <b class="card-title"> {{card.title}}</b>
+    {{card.desc}}
+  <span class="card-update">{{card.update}}</span>
+</div>

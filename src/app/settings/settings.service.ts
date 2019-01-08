@@ -1,7 +1,6 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { Observable } from 'rxjs';
+import { Subject ,  Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 
 import { Profile } from './settings.model';

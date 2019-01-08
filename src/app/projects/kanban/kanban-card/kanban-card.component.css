@@ -1,24 +1,27 @@
-p {
+.card {
   background: rgba(255,255,255,.5);
   margin: 0 0 5px 0;
   padding: 5px 10px;
   min-height:120px;
   position:relative;
 }
-p.need-to-confirm {
+.card.need-to-confirm {
   animation: 1.2s ease need-to-confirm infinite;
 }
-b {
+b.card-title {
   display:block;
   font-size:1.2em;
   margin-bottom:5px;
 }
-span {
+.card-update {
   font-size:.8em;
   color:gray;
   position:absolute;
   bottom:5px;right:10px;
 }
+.dragging {opacity:.5;background-color:rgba(255, 243, 161,.5); transform:scale(.8,.8); transition:.3s}
+.card-put-before {border-bottom:2px dashed rgb(50,58,68);width:calc(100% + 20px); display:block;;
+  margin-left:-10px;margin-right:-10px;margin-top:-5px;margin-bottom:10px;}
 
 @keyframes need-to-confirm {
   0%,100% {opacity:.1; transform: scale3d(.95,.95,.95)}

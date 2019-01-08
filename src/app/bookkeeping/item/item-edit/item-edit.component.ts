@@ -324,7 +324,6 @@ export class ItemEditComponent implements OnInit, OnDestroy {
       if (filteredFile.length > 0) {
         image.image = filteredFile[0].image;
       }
-      console.log(image);
     });
 
     if (images) {
@@ -360,6 +359,7 @@ export class ItemEditComponent implements OnInit, OnDestroy {
     this.itemService.editItem(this.id, this.itemForm.value).subscribe(
       res => {
         console.log(res);
+        this.router.navigate(['../'], {relativeTo: this.route});
       },
       err => {
         console.log(err);

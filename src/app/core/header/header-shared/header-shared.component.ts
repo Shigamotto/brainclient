@@ -12,8 +12,7 @@ import {
   ActivatedRoute
 } from '@angular/router';
 
-import { Subscription } from 'rxjs';
-import { Subject, Observable } from 'rxjs';
+import { Subscription ,  Subject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header-shared',

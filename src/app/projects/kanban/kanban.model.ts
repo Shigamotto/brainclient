@@ -9,5 +9,6 @@ export class Card {
   title: string;
   desc: string;
   update: string;
+  finished?: boolean;
   confirming?: boolean;
 }

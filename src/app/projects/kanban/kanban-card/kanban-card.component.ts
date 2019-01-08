@@ -1,9 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import * as moment from 'moment';
 
 import { Card } from '../kanban.model';
 import { Task } from '../../projects.model';
-
 
 @Component({
   selector: 'app-kanban-card',
@@ -11,14 +10,27 @@ import { Task } from '../../projects.model';
   styleUrls: ['./kanban-card.component.css']
 })
 export class KanbanCardComponent implements OnInit {
-  @Input() card: Task;
+  @Output() dragIsFinish = new EventEmitter<any>();
+  @Input() card: Card;
+  private draggingStart = false;
 
   constructor() { }
 
   ngOnInit() { }
 
+  dragOver() { this.card.finished = true; }
+
+  dragLeave() { this.card.finished = false; }
+
   dragStart(ev) {
+    this.draggingStart = true;
+    this.card.finished = false;
     ev.dataTransfer.setData('text', ev.target.id);
+  }
+
+  dragEnd() {
+    this.draggingStart = false;
+    this.dragIsFinish.emit();
   }
 
 }

@@ -11,6 +11,7 @@ import { OAuthService } from '../../oauth/oauth.service';
 export class ItemService {
   private items: Item[] = [];
   private item: Item = Item.EMPTY_MODEL;
+  private checkedItem: number[] = [];
   ItemsChanged = new Subject<Item[]>();
   ItemChose = new Subject<Item>();
 
@@ -45,6 +46,7 @@ export class ItemService {
   }
 
   getItems() {
+    this.checkedItem = [];
     this.http.get<Item[]>('http://127.0.0.1:8000/api/items/?format=json')
       .subscribe(
         (data: Item[]) => {
@@ -54,6 +56,10 @@ export class ItemService {
 
   choseItem(data: Item) {
     this.item = data;
+    this.ItemChose.next(this.item);
+  }
+
+  oldItem() {
     this.ItemChose.next(this.item);
   }
 
@@ -73,9 +79,30 @@ export class ItemService {
   }
 
   addItem(item: Item | any) {
-    console.log(item);
     return this.http.post<Item>('http://127.0.0.1:8000/api/items/create/?format=json',
       item );
   }
+
+  removeItem(id: number) {
+    return this.http.delete<Item>('http://127.0.0.1:8000/api/items/' + id + '/?format=json' )
+      .subscribe(
+        res => {
+          this.getItems();
+          console.log(res);
+        },
+        err => {
+          console.log(err);
+        }
+      );
+  }
+
+  onCheckBoxChange(value: {id: number, checked: boolean}) {
+    if (value.checked) {
+      this.checkedItem.push(value.id);
+    } else {
+      this.checkedItem = this.checkedItem.filter(function(e) { return e !== value.id; });
+    }
+  }
+
 
 }

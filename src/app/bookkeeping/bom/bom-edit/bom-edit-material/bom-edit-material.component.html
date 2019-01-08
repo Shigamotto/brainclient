@@ -1,10 +1,10 @@
 <tbody class="contents" [formGroup]="formControlBom" >
-  <tr class="bk-line-i">
+  <tr class="bk-line-i" >
     <td class="prefix" *ngFor="let prefix of range"></td>
     <td class="bom-bill-image">
       <input formControlName="image" type="hidden" />
       <span (click)="openImage()" [ngClass]="{'no-images': imageIsHere() }" ></span>
-      <button type="button" class="btn add-line" (click)="addSubLine(i)">T</button>
+      <button type="button" class="btn add-line" (click)="addSubLineMaterial.emit()" >T</button>
     </td>
     <td class="bk-line-name">
       <input formControlName="id" type="hidden">
@@ -21,26 +21,32 @@
       </mat-form-field>
     </td>
     <td class="bk-line-count">
-      <input formControlName="count" type="text" class="bk-in" matTooltip="Count" matTooltipPosition="above" />
+      <input formControlName="count" type="text" class="bk-in" matTooltip="Count" matTooltipPosition="above" [(ngModel)]="materialBOM.count" />
     </td>
     <td class="bk-line-price">
-      <input formControlName="price" type="text" class="bk-in" matTooltip="Price" matTooltipPosition="above" />
+      <input formControlName="price" type="text" class="bk-in" matTooltip="Price" matTooltipPosition="above" [(ngModel)]="materialBOM.price"/>
     </td>
     <td class="remove">
       <button type="button" class="btn"
-              (click)="removed.emit(inde)"></button>
+              (click)="removed.emit(materialBOM.bom_service_id)"></button>
     </td>
   </tr>
-  <div class="contents" formArrayName="child">
-    <app-bom-edit-material *ngFor="let subLineCtrl of formControlBom.get('child').controls; let i = index"
-                           [formGroupName]="i"
-                           [inde]="i"
-                           [level]="level+1"
-                           [formControlBom]="subLineCtrl"
-                           [items]="items"
-                           [filteredItems]="filteredItems"
-                           [materialBOM]="materialBOM.child[i]"
-                           (removed)="formControlBom.get('child').removeAt($event)" >
-    </app-bom-edit-material>
-  </div>
+  <tr *ngIf="materialBOM.bom_service_over" >
+    <td class="prefix" *ngFor="let prefix of range"></td>
+    <td colspan="5" style="height:2px;background:red;"></td>
+  </tr>
+  <!--<div class="contents" formArrayName="child">-->
+    <!--<app-bom-edit-material *ngFor="let subLineCtrl of formControlBom.get('child').controls; let i = index"-->
+                           <!--[formGroupName]="i"-->
+                           <!--[inde]="i"-->
+                           <!--[level]="level+1"-->
+                           <!--[formControlBom]="subLineCtrl"-->
+                           <!--[items]="items"-->
+                           <!--[filteredItems]="filteredItems"-->
+                           <!--[materialBOM]="materialBOM.child[i]"-->
+                           <!--[bomStorage]="bomStorage"-->
+                           <!--(addImage)="addNewImage($event)"-->
+                           <!--(removed)="formControlBom.get('child').removeAt($event)" >-->
+    <!--</app-bom-edit-material>-->
+  <!--</div>-->
 </tbody>

@@ -13,7 +13,8 @@ import * as moment from 'moment';
 import "dhtmlx-scheduler";
 // import "dhtmlx-scheduler/codebase/ext/dhtmlxscheduler_agenda_view";
 import "dhtmlx-scheduler/codebase/ext/dhtmlxscheduler_minical";
-import {} from "@types/dhtmlxscheduler";
+// import {} from "@types/dhtmlxscheduler";
+import "@types/dhtmlxscheduler";
 
 
 @Component({

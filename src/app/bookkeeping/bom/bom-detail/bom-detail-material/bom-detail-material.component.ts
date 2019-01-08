@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { MaterialBOM } from '../../bom.model';
 import {BomDetailMaterialImageComponent} from './bom-detail-image/bom-detail-material-image.component';

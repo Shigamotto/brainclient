@@ -2,8 +2,8 @@
 <app-header [ngClass]="{
     'menu-open': headerService.menuOpened,
     'promo': authService.isAuthenticated()
-    }"></app-header>
-<div class="container" [ngClass]="{'menu-open': headerService.menuOpened}">
+    }" *ngIf="authService.isAuthenticated()" ></app-header>
+<div class="container" [ngClass]="{'menu-open': headerService.menuOpened, 'promo': !authService.isAuthenticated()}">
   <router-outlet></router-outlet>
 </div>
 <router-outlet name="search"></router-outlet>

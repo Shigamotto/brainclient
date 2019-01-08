@@ -2,6 +2,9 @@
             class="bk-lst-i"
             *ngFor="let item of items; let i = index"
             [item]="item"
-            [index]="i">
+            [index]="i"
+            [ngClass]="{'old-one': item.id == chosenId}"
+            (toggle)="onCheckBoxChange($event)"
+>
 </app-item-list-element>
 

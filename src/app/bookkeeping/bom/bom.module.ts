@@ -14,6 +14,7 @@ import { BomEditMaterialImageComponent } from './bom-edit/bom-edit-material/bom-
 import { BOMMenuComponent } from './bom-menu/bom-menu.component';
 
 import { BOMService } from './bom.service';
+import { BomStorage } from './bom.storage';
 
 // import { HeaderBOMComponent } from './header-bom/header.bom.component';
 
@@ -45,6 +46,7 @@ import { BOMRoutingModule } from './bom-routing.module';
   ],
   providers: [
     BOMService,
+    BomStorage
   ]
 })
 export class BOMModule {}

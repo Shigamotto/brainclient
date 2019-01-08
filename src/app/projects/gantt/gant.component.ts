@@ -4,27 +4,31 @@ import {LinkService} from './link.service';
 import {Event, Link} from './event';
 
 import 'dhtmlx-gantt';
-import {} from '@types/dhtmlxgantt';
+/// <reference types=@types/dhtmlxgantt" />
+
+// import {} from '@types/dhtmlxgantt';
+// import * as dhtmlxgantt from 'dhtmlxgantt';
+import {} from 'dhtmlxgantt';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'gantt',
   styleUrls: ['gant.component.css'],
-	providers: [EventService, LinkService],
-	template: '<div #gantt_here style=\'width: 100%; height: 600px;\'></div>',
+  providers: [EventService, LinkService],
+  template: '<div #gantt_here style=\'width: 100%; height: 600px;\'></div>',
 })
 export class GanttComponent implements OnInit {
-	@ViewChild('gantt_here') ganttContainer: ElementRef;
+  @ViewChild('gantt_here') ganttContainer: ElementRef;
 
-	constructor(private eventService: EventService, private linkService: LinkService){}
+  constructor(private eventService: EventService, private linkService: LinkService){}
 
-	ngOnInit() {
-	  console.log('Gant is init');
-		gantt.config.xml_date = '%Y-%m-%d %H:%i';
+  ngOnInit() {
+    console.log('Gant is init');
+    gantt.config.xml_date = '%Y-%m-%d %H:%i';
 
-		gantt.init(this.ganttContainer.nativeElement);
+    gantt.init(this.ganttContainer.nativeElement);
 
-		/*gantt.attachEvent("onAfterTaskAdd", (id, item) => {
+    /*gantt.attachEvent("onAfterTaskAdd", (id, item) => {
 			this.taskService.insert(this.serializeTask(item, true))
 				.then((response)=> {
 					if (response.id != id) {
@@ -64,9 +68,9 @@ export class GanttComponent implements OnInit {
 			});*/
 
     gantt.parse({data: this.eventService.event, links: this.linkService.links});
-	}
+  }
 
-	/*private serializeTask(data: any, insert: boolean = false): Event {
+  /*private serializeTask(data: any, insert: boolean = false): Event {
 		return this.serializeItem(data, insert) as Event;
 	}
 

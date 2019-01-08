@@ -14,6 +14,7 @@ export class KanbanListComponent implements OnInit {
   @Input() list: Kanban;
   @Input() cardStore: KanbanService;
   displayAddCard = false;
+  dragEnterProperty = false;
 
   constructor(
     private projectService: ProjectsService
@@ -28,9 +29,12 @@ export class KanbanListComponent implements OnInit {
 
   allowDrop($event) {
     $event.preventDefault();
+    this.dragEnterProperty = true;
+    $event.preventDefault();
   }
 
   drop($event) {
+    this.dragEnterProperty = false;
     $event.preventDefault();
     const data = $event.dataTransfer.getData('text');
 
@@ -57,8 +61,12 @@ export class KanbanListComponent implements OnInit {
     this.projectService.setStatus(data, this.list.tag);
   }
 
+  dragLeave() { this.dragEnterProperty = false; }
+
+  dragIsFinish() { this.cardStore.dragIsFinish(); }
+
   onEnter(value: string) {
-    const cardId =  this.cardStore.newCard(value,'', moment(new Date()).format('YYYY-MM-DD[T]HH:mm:ss.SSS[Z]') );
+    const cardId =  this.cardStore.newCard(value, '', moment(new Date()).format('YYYY-MM-DD[T]HH:mm:ss.SSS[Z]') );
     this.list.cards.push(cardId);
   }
 

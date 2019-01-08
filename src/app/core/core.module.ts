@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgModule, Injector } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter, MatMomentDateModule} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter, MatMomentDateModule } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 // import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
@@ -90,4 +90,26 @@ import {ItemService} from '../bookkeeping/item/item.service';
     // {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}
   ]
 })
-export class CoreModule {}
+export class CoreModule {
+  // // @Optional() @SkipSelf() - если вдруг мы попытаемся импортировать CoreModule в AppModule и например UserModule - получим ошибку
+  // constructor(@Optional() @SkipSelf() parentModule: CoreModule,
+  //             userService: OAuthService,
+  //             inj: Injector,
+  //             auth: AuthService,
+  //             http: HttpClient) {
+  //
+  //   // Получаем интерцепторы которые реализуют интерфейс AuthInterceptor
+  //   const interceptors = inj.get<OAuthInterceptor[]>(HTTP_INTERCEPTORS)
+  //     .filter(i => i.init );
+  //   // передаем http сервис и сервис авторизации.
+  //   interceptors.forEach(i => i.init(http, auth));
+  //
+  //   userService.init();
+  //
+  //   if (parentModule) {
+  //     // если мы здесь, значит случайно включили CoreModule в двух и более местах
+  //     throw new Error(
+  //       'CoreModule is already loaded. Import it in the AppModule only');
+  //   }
+  // }
+}

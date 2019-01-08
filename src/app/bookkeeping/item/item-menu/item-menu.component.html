@@ -1,10 +1,11 @@
 <div class="bk-menu">
-    <a class="bk-button refresh"></a>
+    <a class="bk-button refresh" (click)="onRefresh()"></a>
+    <a class="bk-button back" (click)="onBackToList()" *ngIf="id && isDetailOrEdit">Back to Items</a>
     <a class="bk-button create" routerLink="new">New</a>
-    <a class="bk-button reply" [routerLink]="[id, 'edit']" *ngIf="id">Edit</a>
-    <a class="bk-button delete" >Delete</a>
-    <a class="bk-button mark" (click)="onEdit()">Mark</a>
-    <a class="bk-button lock">Lock</a>
-    <a class="bk-button task">Task</a>
+    <a class="bk-button reply" (click)="onEdit()" *ngIf="id && !isDeleted">Edit</a>
+    <a class="bk-button delete" *ngIf="id && isDetailOrEdit" (click)="onDelete()" >Delete</a>
+    <a class="bk-button mark" *ngIf="id && isDetailOrEdit">Mark</a>
+    <a class="bk-button lock" *ngIf="id && isDetailOrEdit">Lock</a>
+    <a class="bk-button task" *ngIf="id && isDetailOrEdit">Task</a>
     <a class="bk-button print">Print</a>
 </div>

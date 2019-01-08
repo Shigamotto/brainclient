@@ -1,9 +1,8 @@
-// import {Task} from '../projects.model';
 import {Kanban, Card} from './kanban.model';
 import {Task} from '../projects.model';
 
 export class KanbanService {
-  cards: Object = {};
+  cards: Object[] = [];
   lastid = 0;
   _addCard(card: Card, id?: string ) {
     card.id = id ? id : String(++this.lastid);
@@ -20,7 +19,15 @@ export class KanbanService {
    task.title = title;
    task.desc = description;
    task.update = update;
+   task.finished = false;
    return (this._addCard(task, id));
+  }
+
+  dragIsFinish() {
+    this.cards.map((card: Card) => {
+      card.finished = false;
+      return card;
+    });
   }
 
 }

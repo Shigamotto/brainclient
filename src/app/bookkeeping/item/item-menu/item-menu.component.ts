@@ -11,6 +11,9 @@ import {Subject, Subscription} from 'rxjs';
 })
 export class ItemMenuComponent implements OnInit, OnDestroy {
   private id: number;
+  private isDetailOrEdit = false;
+  private isDeleted = false;
+  private isEdit = false;
   public idChose = new Subject<number>();
 
   subscription: Subscription;
@@ -29,11 +32,34 @@ export class ItemMenuComponent implements OnInit, OnDestroy {
 
   setId(id: number) {
     this.id = id;
+    this.isDetailOrEdit = true;
+    this.isDeleted = false;
     this.idChose.next(this.id);
   }
 
+  onRefresh() {
+    if (this.isDetailOrEdit && this.id !== 0) {
+      this.itemService.getItem(this.id);
+    } else {
+      this.itemService.getItems();
+    }
+  }
+
   onEdit() {
-    this.router.navigate(['edit'],{ relativeTo: this.route })
+    this.isEdit = true;
+    this.router.navigate([this.id, 'edit'], { relativeTo: this.route });
+  }
+
+  onDelete() {
+    this.itemService.removeItem(this.id);
+    this.isDetailOrEdit = false;
+    this.isDeleted = true;
+    this.router.navigate(['./'], { relativeTo: this.route });
+  }
+
+  onBackToList() {
+    this.isDetailOrEdit = false;
+    this.router.navigate(['./'],{ relativeTo: this.route });
   }
 
   ngOnDestroy() {
